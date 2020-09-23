@@ -31,6 +31,7 @@ while(true) {
         'currentlyPlayingStatus' => $currentlyPlayingStatus,
         'currentStatus' => $fppStatus->status,
     ];
-    $res = file_put_contents($pluginPath . "/test.json", json_encode($save));
+    file_put_contents($pluginPath . "/test.json", json_encode($save));
+    file_put_contents($pluginPath . "/test1.json", 'test');
     sleep(10);
 }
