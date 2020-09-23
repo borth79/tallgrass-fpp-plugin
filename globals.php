@@ -34,9 +34,7 @@ function getAllPlaylists()
 
 function getPlaylistMeta($playlist)
 {
-    echo "GETTING PLAYLIST META<br>";
     $url = "http://127.0.0.1/api/playlist/" . str_ireplace(' ', '%20', $playlist);
-    print_r($url);
     $options = [
         'http' => [
             'method'  => 'GET',
@@ -44,7 +42,6 @@ function getPlaylistMeta($playlist)
     ];
     $context = stream_context_create($options);
     $result = file_get_contents( $url, false, $context );
-    print_r($result);
     return json_decode( $result, true );
 }
 
@@ -63,21 +60,20 @@ function getAllSequences()
 
 function postAutoplayPlaylist($playlist)
 {
-    $postdata = $playlist;
-    echo "\nPost Data:\n";
-    print_r($postdata);
+    echo "<br />Post Data:<br />";
+    print_r($playlist);
     $options = [
         'http' => [
             'method'  => 'POST',
             'header'  => 'Content-Type: application/x-www-form-urlencoded',
-            'content' => $postdata
+            'content' => $playlist
         ]
     ];
     $context = stream_context_create($options);
     $url = "http://api.borthlights.com/api/xlights/autoplay-list";
     $result = file_get_contents( $url, false, $context );
-    echo "\nPost Data Response:\n";
+    echo "<br />Post Data Response:<br />";
     print_r($result);
-    file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/testResponse.txt");
+    file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/testResponse.txt", $result);
     return json_decode( $result, true );
 }
