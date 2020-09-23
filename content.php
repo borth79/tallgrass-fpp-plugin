@@ -31,21 +31,7 @@ $url = "http://127.0.0.1/api/sequence";
 $result = file_get_contents( $url, false, $context );
 $sequences = json_decode( $result, true );
 
-$url = "http://127.0.0.1/api/schedule";
-$result = file_get_contents( $url, false, $context );
-$schedules = json_decode( $result, true );
 
-// process schedule
-$selectedSchedule = null;
-foreach ($schedules as $schedule) {
-    if ($schedule['enabled'] !== 1) {
-        continue;
-    }
-    if ($store->fullPlaylist === $schedule['playlist']) {
-        // we have found the first playlist matching. send off this data and stop
-        $selectedSchedule = $schedule;
-    }
-}
 ?>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
@@ -86,19 +72,6 @@ foreach ($schedules as $schedule) {
             </select>
             <small id="fullPlaylistHelp" class="form-text text-muted">Sync your full playlist with TallGrassLights.com</small>
         </div>
-
-        <div class="form-group">
-            <label for="schedule">Full Playlist</label>
-            <select class="form-control" name="schedule" id="schedule" aria-describedby="scheduleHelp">
-                <?php
-                foreach($playlists as $playlist) {
-                    echo '<option value="'.$playlist.'" '. (($store->fullPlaylist === $playlist) ? 'selected' : '') .'>'. $playlist .'</option>';
-                }
-                ?>
-            </select>
-            <small id="scheduleHelp" class="form-text text-muted">Sync your schedule with TallGrassLights.com</small>
-        </div>
-
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
@@ -113,7 +86,6 @@ foreach ($sequences as $name) {
 ?>
 
 <?php
-    print_r($schedules);
-    print_r($selectedSchedule);
+//    print_r($selectedSchedule);
 ?>
 </div>
