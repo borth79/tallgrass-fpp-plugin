@@ -2,9 +2,13 @@
 
 require_once "process.php";
 
+$test = [
+        'apiKey' => '123sdwersdf'
+];
+file_put_contents($pluginPath . "/store.json", json_encode($test));
+
 $pluginPath = "/home/fpp/media/plugins/tallgrass-lights";
 $scriptPath = "/home/fpp/media/plugins/tallgrass-lights";
-file_put_contents($pluginPath . "test.txt", 'test');
 $options = [
     'http' => [
         'method'  => 'GET',
