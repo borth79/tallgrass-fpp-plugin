@@ -33,9 +33,11 @@ if ($_REQUEST['submission']) {
             // we have found the first playlist matching. send off this data and stop
             $selectedSchedule = $schedule;
         }
-        echo "\nSending Schedule:\n";
-        print_r($selectedSchedule);
     }
 
     $res = file_put_contents($pluginPath . "/store.json", json_encode($save));
+
+    // send autoplayPlaylist
+    // send fullPlaylist
+    // send schedule
 } # if
