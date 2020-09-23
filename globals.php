@@ -36,6 +36,7 @@ function getPlaylistMeta($playlist)
 {
     echo "GETTING PLAYLIST META<br>";
     $url = "http://127.0.0.1/api/playlist/" . urlencode($playlist);
+    print_r($url);
     $options = [
         'http' => [
             'method'  => 'GET',
