@@ -2,5 +2,6 @@
 
 
 if ($_REQUEST['submission']) {
-    echo 'submission';
-}
+    // the form has been submitted
+
+} # if
