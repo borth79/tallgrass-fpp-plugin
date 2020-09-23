@@ -14,7 +14,7 @@ function getSchedules() {
     ];
     $context = stream_context_create($options);
     $result = file_get_contents( $url, false, $context );
-    $schedules = json_decode( $result, true );
+    return json_decode( $result, true );
 }
 
 function getAllPlaylists()
