@@ -20,6 +20,7 @@ if ($_REQUEST['submission']) {
     ];
 
     $schedules = getSchedules();
+    print_r($schedules);
 
     // process schedule
     $selectedSchedule = null;
@@ -33,8 +34,9 @@ if ($_REQUEST['submission']) {
         }
     }
 
-    $res = file_put_contents($pluginPath . "/store.json", json_encode($save));
-
+    file_put_contents($pluginPath . "/store.json", json_encode($save));
+    print_r($_REQUEST['autoplayPlaylist']);
+    print_r(getPlaylistMeta($_REQUEST['autoplayPlaylist']));
     // send autoplayPlaylist
     postAutoplayPlaylist(getPlaylistMeta($_REQUEST['autoplayPlaylist']));
     // send fullPlaylist
