@@ -13,10 +13,7 @@ $options = [
 ];
 
  // get the playlists
-$url = "http://127.0.0.1/api/playlists";
-$context = stream_context_create( $options );
-$result = file_get_contents( $url, false, $context );
-$playlists = json_decode( $result, true );
+$playlists = getAllPlaylists();
 
 // get the playlist details
 foreach ($playlists as $playlist) {
