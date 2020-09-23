@@ -11,6 +11,7 @@ $options = [
         'method'  => 'GET',
     ]
 ];
+$context = stream_context_create($options);
 
  // get the playlists
 $playlists = getAllPlaylists();
@@ -24,9 +25,7 @@ foreach ($playlists as $playlist) {
 
 }
 
-$url = "http://127.0.0.1/api/sequence";
-$result = file_get_contents( $url, false, $context );
-$sequences = json_decode( $result, true );
+$sequences = getAllSequences();
 
 ?>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
