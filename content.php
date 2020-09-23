@@ -1,4 +1,7 @@
 <?php
+
+require_once "process.php";
+
 $pluginPath = "/home/fpp/media/plugins/tallgrass-lights";
 $scriptPath = "/home/fpp/media/plugins/tallgrass-lights";
 
@@ -20,7 +23,7 @@ foreach ($playlists as $playlist) {
     $url = "http://127.0.0.1/api/playlist/" . $playlist;
     $result = file_get_contents( $url, false, $context );
     $responseMeta = json_decode( $result, true );
-    print_r($responseMeta);
+
 }
 
 $url = "http://127.0.0.1/api/sequence";
@@ -44,7 +47,8 @@ foreach ($response as $name) {
         <h2>TallGrass Lights Plugin</h2>
     </div>
 
-    <form method="post" action="#">
+    <form method="post" action="content.php">
+        <input type="hidden" name="submission" value="1">
         <div class="form-group">
             <label for="apiKey">API Key</label>
             <input type="text" class="form-control" id="apiKey" aria-describedby="apiKeyHelp">
