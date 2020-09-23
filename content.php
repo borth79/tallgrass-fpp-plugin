@@ -15,6 +15,7 @@ print_r($response);
 
 $url = "http://127.0.0.1/api/sequence";
 $result = file_get_contents( $url, false, $context );
+print_r($result);
 $response = json_decode( $result, true );
 print_r($response);
 ?>
