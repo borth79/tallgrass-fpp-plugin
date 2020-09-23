@@ -9,6 +9,7 @@ $test = [
 ];
 file_put_contents($pluginPath . "/store.json", json_encode($test));
 $res = json_decode(file_get_contents($pluginPath . "/store.json"));
+print_r($res);
 
 $options = [
     'http' => [
