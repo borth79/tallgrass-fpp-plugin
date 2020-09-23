@@ -10,8 +10,8 @@ $options = array(
 );
 $context = stream_context_create( $options );
 $result = file_get_contents( $url, false, $context );
-$response = json_decode( $result, true );
-print_r($response);
+$playlists = json_decode( $result, true );
+print_r($playlists);
 
 $url = "http://127.0.0.1/api/sequence";
 $result = file_get_contents( $url, false, $context );
@@ -39,6 +39,19 @@ foreach ($response as $name) {
             <input type="text" class="form-control" id="apiKey" aria-describedby="apiKeyHelp">
             <small id="apiKeyHelp" class="form-text text-muted">Enter your TallGrass API key</small>
         </div>
+
+        <div class="form-group">
+            <label for="syncPlaylist">Sync Playlist</label>
+            <select class="form-control" id="syncPlaylist" aria-describedby="syncPlaylistHelp">
+                <?php
+                    foreach($playlists as $playlist) {
+                        echo '<option value="'.$playlist.'">'. $playlist .'</option>';
+                    }
+                ?>
+            </select>
+            <small id="syncPlaylistHelp" class="form-text text-muted">Sync your playlist with TallGrassLights.com</small>
+        </div>
+
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
