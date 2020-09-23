@@ -16,6 +16,7 @@ $playlists = json_decode( $result, true );
 
 // get the playlist details
 foreach ($playlists as $playlist) {
+    echo "Playlist: " . $playlist . "\n";
     $url = "http://127.0.0.1/api/playlists/" . $playlist;
     $result = file_get_contents( $url, false, $context );
     $responseMeta = json_decode( $result, true );
