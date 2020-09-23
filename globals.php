@@ -35,7 +35,6 @@ function getAllPlaylists()
 function getPlaylistMeta($playlist)
 {
     echo "GETTING PLAYLIST META<br>";
-    print_r($playlist);
     $url = "http://127.0.0.1/api/playlist/" . $playlist;
     $options = [
         'http' => [
@@ -44,6 +43,7 @@ function getPlaylistMeta($playlist)
     ];
     $context = stream_context_create($options);
     $result = file_get_contents( $url, false, $context );
+    print_r($result);
     return json_decode( $result, true );
 }
 
