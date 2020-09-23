@@ -9,5 +9,6 @@ if ($_REQUEST['submission']) {
     $save = [
         'apiKey' => $_REQUEST['apiKey']
     ];
+    echo $pluginPath;
     $res = file_get_contents($pluginPath . "/store.json", json_encode($save));
 } # if
