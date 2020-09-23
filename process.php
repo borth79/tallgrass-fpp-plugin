@@ -9,6 +9,7 @@ if ($_REQUEST['submission']) {
         'apiKey' => $_REQUEST['apiKey'],
         'autoplayPlaylist' => $_REQUEST['autoplayPlaylist'],
         'fullPlaylist' => $_REQUEST['fullPlaylist'],
+        'schedule' => $_REQUEST['fullPlaylist'],
     ];
 
     $res = file_put_contents($pluginPath . "/store.json", json_encode($save));

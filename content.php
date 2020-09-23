@@ -33,8 +33,19 @@ $sequences = json_decode( $result, true );
 
 $url = "http://127.0.0.1/api/schedule";
 $result = file_get_contents( $url, false, $context );
-print_r($result);
-$schedule = json_decode( $result, true );
+$schedules = json_decode( $result, true );
+
+// process schedule
+$selectedSchedule = null;
+foreach ($schedules as $schedule) {
+    if ($schedule['enabled'] !== 1) {
+        continue;
+    }
+    if ($store->fullPlaylist === $schedule['playlist']) {
+        // we have found the first playlist matching. send off this data and stop
+        $selectedSchedule = $schedule;
+    }
+}
 ?>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
@@ -102,6 +113,7 @@ foreach ($sequences as $name) {
 ?>
 
 <?php
-    print_r($schedule);
+    print_r($schedules);
+    print_r($selectedSchedule);
 ?>
 </div>
