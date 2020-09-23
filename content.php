@@ -1,4 +1,6 @@
 <?php
+$pluginPath = "/home/fpp/media/plugins/tallgrass-lights";
+$scriptPath = "/home/fpp/media/plugins/tallgrass-lights";
 
 require_once "process.php";
 
@@ -6,9 +8,8 @@ $test = [
         'apiKey' => '123sdwersdf'
 ];
 file_put_contents($pluginPath . "/store.json", json_encode($test));
+$res = json_decode(file_get_contents($pluginPath . "/store.json"));
 
-$pluginPath = "/home/fpp/media/plugins/tallgrass-lights";
-$scriptPath = "/home/fpp/media/plugins/tallgrass-lights";
 $options = [
     'http' => [
         'method'  => 'GET',
@@ -55,7 +56,7 @@ foreach ($response as $name) {
         <input type="hidden" name="submission" value="1">
         <div class="form-group">
             <label for="apiKey">API Key</label>
-            <input type="text" class="form-control" id="apiKey" aria-describedby="apiKeyHelp">
+            <input type="text" class="form-control" id="apiKey" aria-describedby="apiKeyHelp" value="<?=$res['apiKey']?>">
             <small id="apiKeyHelp" class="form-text text-muted">Enter your TallGrass API key</small>
         </div>
 
