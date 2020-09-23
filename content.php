@@ -2,16 +2,25 @@
 $pluginPath = "/home/fpp/media/plugins/tallgrass-lights";
 $scriptPath = "/home/fpp/media/plugins/tallgrass-lights";
 
+$options = [
+    'http' => [
+        'method'  => 'GET',
+    ]
+];
+
+ // get the playlists
 $url = "http://127.0.0.1/api/playlists";
-$options = array(
-    'http' => array(
-        'method'  => 'GET'
-    )
-);
 $context = stream_context_create( $options );
 $result = file_get_contents( $url, false, $context );
 $playlists = json_decode( $result, true );
-print_r($playlists);
+
+// get the playlist details
+foreach ($playlists as $playlist) {
+    $url = "http://127.0.0.1/api/playlists/" . $playlist;
+    $result = file_get_contents( $url, false, $context );
+    $responseMeta = json_decode( $result, true );
+    print_r($responseMeta);
+}
 
 $url = "http://127.0.0.1/api/sequence";
 $result = file_get_contents( $url, false, $context );
