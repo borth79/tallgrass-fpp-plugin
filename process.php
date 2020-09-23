@@ -19,9 +19,7 @@ if ($_REQUEST['submission']) {
         'fullPlaylist' => $_REQUEST['fullPlaylist'],
     ];
 
-    $url = "http://127.0.0.1/api/schedule";
-    $result = file_get_contents( $url, false, $context );
-    $schedules = json_decode( $result, true );
+    $schedules = getSchedules();
 
     // process schedule
     $selectedSchedule = null;
@@ -38,6 +36,7 @@ if ($_REQUEST['submission']) {
     $res = file_put_contents($pluginPath . "/store.json", json_encode($save));
 
     // send autoplayPlaylist
+    postAutoplayPlaylist(getPlaylistMeta($_REQUEST['autoplayPlaylist']));
     // send fullPlaylist
     // send schedule
 } # if

@@ -5,6 +5,18 @@ $pluginPath = "/home/fpp/media/plugins/tallgrass-fpp-plugin";
 $scriptPath = $pluginPath . "/scripts";
 
 
+function getSchedules() {
+    $url = "http://127.0.0.1/api/schedule";
+    $options = [
+        'http' => [
+            'method'  => 'GET',
+        ]
+    ];
+    $context = stream_context_create($options);
+    $result = file_get_contents( $url, false, $context );
+    $schedules = json_decode( $result, true );
+}
+
 function getAllPlaylists()
 {
     // get the playlists
@@ -42,6 +54,22 @@ function getAllSequences()
     ];
     $context = stream_context_create($options);
     $url = "http://127.0.0.1/api/sequence";
+    $result = file_get_contents( $url, false, $context );
+    return json_decode( $result, true );
+}
+
+function postAutoplayPlaylist($playlist)
+{
+    $postdata = $playlist;
+    $options = [
+        'http' => [
+            'method'  => 'POST',
+            'header'  => 'Content-Type: application/x-www-form-urlencoded',
+            'content' => $postdata
+        ]
+    ];
+    $context = stream_context_create($options);
+    $url = "http://api.borthlights.com/api/xlights/autoplay-list";
     $result = file_get_contents( $url, false, $context );
     return json_decode( $result, true );
 }
