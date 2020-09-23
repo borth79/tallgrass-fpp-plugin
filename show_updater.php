@@ -14,8 +14,6 @@ function getFppStatus() {
     return json_decode( $result );
 }
 
-$test = ['abc'=>123];
-file_put_contents($pluginPath . "/test.json", json_encode($test));
 while(true) {
     file_put_contents($pluginPath . "/test1.json", 'test');
     $fppStatus = getFppStatus();
@@ -33,7 +31,6 @@ while(true) {
         'currentlyPlayingStatus' => $currentlyPlayingStatus,
         'currentStatus' => $fppStatus->status,
     ];
-//    file_put_contents($pluginPath . "/test.json", json_encode($save));
-    file_put_contents($pluginPath . "/test.json", json_encode($test));
+    file_put_contents($pluginPath . "/test.json", json_encode($save));
     sleep(10);
 }
