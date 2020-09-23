@@ -34,7 +34,6 @@ if ($_REQUEST['submission']) {
         }
     }
 
-    file_put_contents($pluginPath . "/testSchedule.json", json_encode($selectedSchedule));
     file_put_contents($pluginPath . "/store.json", json_encode($save));
 
     print_r(getPlaylistMeta($_REQUEST['autoplayPlaylist']));
