@@ -33,6 +33,7 @@ $sequences = json_decode( $result, true );
 
 $url = "http://127.0.0.1/api/schedule";
 $result = file_get_contents( $url, false, $context );
+print_r($result);
 $schedule = json_decode( $result, true );
 ?>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
