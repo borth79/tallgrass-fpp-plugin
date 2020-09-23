@@ -61,6 +61,8 @@ function getAllSequences()
 function postAutoplayPlaylist($playlist)
 {
     $postdata = $playlist;
+    echo "\nPost Data:\n";
+    print_r($postdata);
     $options = [
         'http' => [
             'method'  => 'POST',
@@ -71,6 +73,8 @@ function postAutoplayPlaylist($playlist)
     $context = stream_context_create($options);
     $url = "http://api.borthlights.com/api/xlights/autoplay-list";
     $result = file_get_contents( $url, false, $context );
+    echo "\nPost Data Response:\n";
+    print_r($result);
     file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/testResponse.txt");
     return json_decode( $result, true );
 }
