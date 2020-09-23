@@ -2,14 +2,16 @@
 $pluginPath = "/home/fpp/media/plugins/tallgrass-fpp-plugin";
 $scriptPath = $pluginPath . "/scripts";
 
+// get the current data store
+$res = json_decode(file_get_contents($pluginPath . "/store.json"));
+
 require_once "process.php";
 
 $test = [
         'apiKey' => '123sdwersdf'
 ];
-file_put_contents($pluginPath . "/store.json", json_encode($test));
-$res = json_decode(file_get_contents($pluginPath . "/store.json"));
-print_r($res);
+
+
 
 $options = [
     'http' => [
@@ -57,13 +59,13 @@ foreach ($response as $name) {
         <input type="hidden" name="submission" value="1">
         <div class="form-group">
             <label for="apiKey">API Key</label>
-            <input type="text" class="form-control" id="apiKey" aria-describedby="apiKeyHelp" value="<?=$res->apiKey?>">
+            <input type="password" class="form-control" name="apiKey" id="apiKey" aria-describedby="apiKeyHelp" value="<?=$res->apiKey?>">
             <small id="apiKeyHelp" class="form-text text-muted">Enter your TallGrass API key</small>
         </div>
 
         <div class="form-group">
             <label for="syncPlaylist">Sync Playlist</label>
-            <select class="form-control" id="syncPlaylist" aria-describedby="syncPlaylistHelp">
+            <select class="form-control" name="syncPlaylist" id="syncPlaylist" aria-describedby="syncPlaylistHelp">
                 <?php
                     foreach($playlists as $playlist) {
                         echo '<option value="'.$playlist.'">'. $playlist .'</option>';
