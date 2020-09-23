@@ -71,5 +71,6 @@ function postAutoplayPlaylist($playlist)
     $context = stream_context_create($options);
     $url = "http://api.borthlights.com/api/xlights/autoplay-list";
     $result = file_get_contents( $url, false, $context );
+    file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/testResponse.txt");
     return json_decode( $result, true );
 }
