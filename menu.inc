@@ -12,18 +12,18 @@
 # help menu in this example template.
 
 $menuEntries = Array(
+//	Array(
+//		'text' => 'Template - Status',
+//		'type' => 'status',
+//		'page' => 'status.php',
+//		'wrap' => 1
+//	),
 	Array(
-		'text' => 'Template - Status',
-		'type' => 'status',
-		'page' => 'status.php',
+		'text' => 'TallGrass Lights',
+		'type' => 'content',
+		'page' => 'content.php',
 		'wrap' => 1
 	),
-#	Array(
-#		'text' => 'Template - Content Setup',
-#		'type' => 'content',
-#		'page' => 'content.php',
-#		'wrap' => 1
-#	),
 #	Array(
 #		'text' => 'Template - Output',
 #		'type' => 'output',
@@ -31,23 +31,23 @@ $menuEntries = Array(
 #		'wrap' => 1
 #	),
 	Array(
-		'text' => 'Template - Help',
+		'text' => 'TallGrass Lights Help',
 		'type' => 'help',
 		'page' => 'help/help.php',
 		'wrap' => 1
 	),
 	Array(
-		'text' => 'Template - Home',
+		'text' => 'TallGrass Lights Repo',
 		'type' => 'help',
 		'page' => 'https://github.com/FalconChristmas/fpp-plugin-Template',
 		'wrap' => 1
 	),
-	Array(
-		'text' => 'Template - About',
-		'type' => 'help',
-		'page' => 'about.php',
-		'wrap' => 1
-	)
+//	Array(
+//		'text' => 'Template - About',
+//		'type' => 'help',
+//		'page' => 'about.php',
+//		'wrap' => 1
+//	)
 );
 
 ##############################################################################
