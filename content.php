@@ -1,14 +1,15 @@
 <?php
-$pluginPath = "/home/fpp/media/plugins/tallgrass-lights";
-$scriptPath = "/home/fpp/media/plugins/tallgrass-lights";
+$pluginPath = "/home/fpp/media/plugins/tallgrass-fpp-plugin";
+$dataPath = $pluginPath . "/data";
+$scriptPath = $pluginPath . "/scripts";
 
 require_once "process.php";
 
 $test = [
         'apiKey' => '123sdwersdf'
 ];
-file_put_contents($pluginPath . "/store.json", json_encode($test));
-$res = json_decode(file_get_contents($pluginPath . "/store.json"));
+file_put_contents($dataPath . "/store.json", json_encode($test));
+$res = json_decode(file_get_contents($dataPath . "/store.json"));
 
 $options = [
     'http' => [
