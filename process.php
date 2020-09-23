@@ -1,5 +1,5 @@
 <?php
-
+require_once "globals.php";
 
 if ($_REQUEST['submission']) {
     // the form has been submitted

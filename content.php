@@ -1,11 +1,13 @@
 <?php
-$pluginPath = "/home/fpp/media/plugins/tallgrass-fpp-plugin";
-$scriptPath = $pluginPath . "/scripts";
+require_once "globals.php";
 
 // get the current data store
 $res = json_decode(file_get_contents($pluginPath . "/store.json"));
 
 require_once "process.php";
+
+// refresh for changes
+$res = json_decode(file_get_contents($pluginPath . "/store.json"));
 
 $test = [
         'apiKey' => '123sdwersdf'
