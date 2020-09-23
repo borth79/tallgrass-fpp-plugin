@@ -1,11 +1,11 @@
 {
 	"repoName": "fpp-plugin-Template",
-	"name": "Template Plugin for FPP Plugin developers",
+	"name": "TallGrass Lights Plugin",
 	"author": "John Doe (jdoe)",
-	"description": "This template plugin is designed to make it easier for plugin authors to create new FPP Plugins.  You can manually clone the git repository or install the Template Plugin and then go to the plugin's config page and use the form to copy the template into a new plugin directory.",
-	"homeURL": "https://github.com/FalconChristmas/fpp-plugin-Template",
-	"srcURL": "https://github.com/FalconChristmas/fpp-plugin-Template.git",
-	"bugURL": "https://github.com/FalconChristmas/fpp-plugin-Template/issues",
+	"description": "Integration for the TallGrassLights.com website",
+	"homeURL": "https://github.com/borth79/tallgrass-fpp-plugin",
+	"srcURL": "https://github.com/borth79/tallgrass-fpp-plugin",
+	"bugURL": "https://github.com/borth79/tallgrass-fpp-plugin/issues",
 	"allowUpdates": 1,
 	"versions": [
 		{
