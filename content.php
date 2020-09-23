@@ -2,18 +2,9 @@
 require_once "globals.php";
 
 // get the current data store
-$res = json_decode(file_get_contents($pluginPath . "/store.json"));
-
 require_once "process.php";
 
-// refresh for changes
-$res = json_decode(file_get_contents($pluginPath . "/store.json"));
-
-$test = [
-        'apiKey' => '123sdwersdf'
-];
-
-
+$store = json_decode(file_get_contents($pluginPath . "/store.json"));
 
 $options = [
     'http' => [
@@ -61,20 +52,32 @@ foreach ($response as $name) {
         <input type="hidden" name="submission" value="1">
         <div class="form-group">
             <label for="apiKey">API Key</label>
-            <input type="password" class="form-control" name="apiKey" id="apiKey" aria-describedby="apiKeyHelp" value="<?=$res->apiKey?>">
+            <input type="password" class="form-control" name="apiKey" id="apiKey" aria-describedby="apiKeyHelp" value="<?=$store->apiKey?>">
             <small id="apiKeyHelp" class="form-text text-muted">Enter your TallGrass API key</small>
         </div>
 
         <div class="form-group">
-            <label for="syncPlaylist">Sync Playlist</label>
-            <select class="form-control" name="syncPlaylist" id="syncPlaylist" aria-describedby="syncPlaylistHelp">
+            <label for="autoplayPlaylist">Autoplay Playlist</label>
+            <select class="form-control" name="autoplayPlaylist" id="autoplayPlaylist" aria-describedby="autoplayPlaylistHelp">
                 <?php
                     foreach($playlists as $playlist) {
-                        echo '<option value="'.$playlist.'">'. $playlist .'</option>';
+                        echo '<option value="'.$playlist.'" '. (($store->autoplayPlaylist === $playlist) ? 'selected' : '') .'>'. $playlist .'</option>';
                     }
                 ?>
             </select>
-            <small id="syncPlaylistHelp" class="form-text text-muted">Sync your playlist with TallGrassLights.com</small>
+            <small id="autoplayPlaylistHelp" class="form-text text-muted">Sync your autoplay playlist with TallGrassLights.com</small>
+        </div>
+
+        <div class="form-group">
+            <label for="fullPlaylist">Full Playlist</label>
+            <select class="form-control" name="fullPlaylist" id="fullPlaylist" aria-describedby="fullPlaylistHelp">
+                <?php
+                foreach($playlists as $playlist) {
+                    echo '<option value="'.$playlist.'" '. (($store->fullPlaylist === $playlist) ? 'selected' : '') .'>'. $playlist .'</option>';
+                }
+                ?>
+            </select>
+            <small id="fullPlaylistHelp" class="form-text text-muted">Sync your full playlist with TallGrassLights.com</small>
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>

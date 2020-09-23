@@ -6,7 +6,10 @@ if ($_REQUEST['submission']) {
     // syncPlaylist
 
     $save = [
-        'apiKey' => $_REQUEST['apiKey']
+        'apiKey' => $_REQUEST['apiKey'],
+        'autoplayPlaylist' => $_REQUEST['autoplayPlaylist'],
+        'fullPlaylist' => $_REQUEST['fullPlaylist'],
     ];
+
     $res = file_put_contents($pluginPath . "/store.json", json_encode($save));
 } # if
