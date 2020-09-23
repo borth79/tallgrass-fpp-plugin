@@ -34,13 +34,13 @@ function getAllPlaylists()
 
 function getPlaylistMeta($playlist)
 {
+    $url = "http://127.0.0.1/api/playlist/" . $playlist;
     $options = [
         'http' => [
             'method'  => 'GET',
         ]
     ];
     $context = stream_context_create($options);
-    $url = "http://127.0.0.1/api/playlist/" . $playlist;
     $result = file_get_contents( $url, false, $context );
     return json_decode( $result, true );
 }
