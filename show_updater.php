@@ -1,14 +1,14 @@
 <?php
 require_once "globals.php";
 
-$options = array(
-    'http' => array(
-        'method'  => 'GET'
-    )
-);
-$context = stream_context_create( $options );
-
 function getFppStatus() {
+    $options = [
+        'http' => [
+            'method'  => 'GET',
+        ]
+    ];
+    $context = stream_context_create( $options );
+
     $url = "http://127.0.0.1/api/fppd/status";
     $result = file_get_contents( $url, false, $context );
     return json_decode( $result );
