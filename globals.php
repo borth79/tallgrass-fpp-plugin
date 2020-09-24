@@ -63,7 +63,8 @@ function postAutoplayPlaylist($apiKey = null, $playlist = null)
     # MUST PULL META DATA FROM SEQUENCE
     $sequenceData = [];
     foreach ($playlist['mainPlaylist'] as $sequence) {
-        $sequenceData[] = getSequenceData($sequence['sequenceName']);
+        print_r($sequence);
+        $sequenceData[] = array_merge(getSequenceData($sequence['sequenceName']), $sequence['abc']);
     }
     try {
         $postData = [
