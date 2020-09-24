@@ -42,7 +42,7 @@ if ($_REQUEST['submission']) {
         $_REQUEST['apiKey'],
         getPlaylistMeta($_REQUEST['autoplayPlaylist'])
     );
-    array_push($errors, $autoplayResponse->errors);
+    array_push($errors, $autoplayResponse['errors']);
     // send fullPlaylist
     // send schedule
 } # if
