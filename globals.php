@@ -89,6 +89,7 @@ function postAutoplayPlaylist($apiKey = null, $playlist = null)
         curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $response = curl_exec($ch);
+        echo "<br />Response:<br />";
         print_r($response);
         $responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
