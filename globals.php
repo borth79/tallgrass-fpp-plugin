@@ -98,7 +98,7 @@ function postAutoplayPlaylist($apiKey = null, $playlist = null)
 
 function getSequenceData($sequence)
 {
-    $url = "http://127.0.0.1/api/sequence/" . str_ireplace(' ', '%20', $sequence);
+    $url = "http://127.0.0.1/api/sequence/" . str_ireplace(' ', '%20', $sequence) . "/meta";
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
