@@ -38,11 +38,11 @@ if ($_REQUEST['submission']) {
     file_put_contents($pluginPath . "/store.json", json_encode($save));
 
     // send autoplayPlaylist
-    $autoplayResponse = postAutoplayPlaylist(
+    list($code, $errors) = postAutoplayPlaylist(
         $_REQUEST['apiKey'],
         getPlaylistMeta($_REQUEST['autoplayPlaylist'])
     );
-    array_merge($errors, $autoplayResponse['errors']);
+
     // send fullPlaylist
     // send schedule
 } # if
