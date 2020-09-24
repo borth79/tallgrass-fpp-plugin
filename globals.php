@@ -68,7 +68,7 @@ function postAutoplayPlaylist($apiKey = null, $playlist = null)
         }
         print_r(getSequenceData($sequence['sequenceName']));
         $sequenceData[] = array_merge(
-            getSequenceData($sequence['sequenceName']),
+            (array) getSequenceData($sequence['sequenceName']),
             [ 'length' => $sequence['duration'] ]
         );
     }
