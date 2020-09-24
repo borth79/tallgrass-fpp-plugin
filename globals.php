@@ -91,6 +91,7 @@ function postAutoplayPlaylist($apiKey = null, $playlist = null)
         $errors = (isset($response->data)) ? $response->data : false;
         echo "<br />Response:<br />";
         print_r($response);
+        print_r($errors);
         $responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 //        file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/testResponse.txt", json_encode($response));
