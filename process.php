@@ -1,5 +1,6 @@
 <?php
 global $errors;
+$errors = [];
 
 $store = json_decode(file_get_contents($pluginPath . "/store.json"));
 $options = [
@@ -37,12 +38,11 @@ if ($_REQUEST['submission']) {
     file_put_contents($pluginPath . "/store.json", json_encode($save));
 
     // send autoplayPlaylist
-    $test = postAutoplayPlaylist(
+    $autoplayResponse = postAutoplayPlaylist(
         $_REQUEST['apiKey'],
         getPlaylistMeta($_REQUEST['autoplayPlaylist'])
     );
+    array($errors, $autoplayResponse->errors);
     // send fullPlaylist
     // send schedule
-    echo "ERRORS:<br />";
-    print_r($test);
 } # if
