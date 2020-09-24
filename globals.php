@@ -60,10 +60,16 @@ function getAllSequences()
 
 function postAutoplayPlaylist($apiKey = null, $playlist = null)
 {
+    # MUST PULL META DATA FROM SEQUENCE
+    foreach ($playlist['mainPlaylist'] as $sequence) {
+        getSequenceData($sequence['sequenceName']);
+    }
     try {
         $postData = [
             'apiKey' => $apiKey,
-            'list' => $playlist
+            'list' => [
+                '' => $playlist,
+            ]
         ];
         print_r($postData);
         $url = "http://api.tallgrasslights.com/api/xlights/autoplay-list";
@@ -88,4 +94,16 @@ function postAutoplayPlaylist($apiKey = null, $playlist = null)
         echo '</div>';
     }
 
+}
+
+function getSequenceData($sequence)
+{
+    $url = "http://127.0.0.1/api/sequence/" . str_ireplace(' ', '%20', $sequence);
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    $response = curl_exec($ch);
+    $responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+    print_r($response);
 }
