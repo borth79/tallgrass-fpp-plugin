@@ -60,20 +60,19 @@ function getAllSequences()
 
 function postAutoplayPlaylist($apiKey = null, $playlist = null)
 {
-    # MUST PULL META DATA FROM SEQUENCE
-    $sequenceData = [];
-    foreach ($playlist['mainPlaylist'] as $sequence) {
-        if (!$sequence['enabled']) {
-            continue;
-        }
-        print_r(getSequenceData($sequence['sequenceName']));
-        $sequenceData[] = array_merge(
-            (array) getSequenceData($sequence['sequenceName']),
-            [ 'length' => $sequence['duration'] ]
-        );
-    }
-    print_r($sequenceData);
     try {
+        # MUST PULL META DATA FROM SEQUENCE
+        $sequenceData = [];
+        foreach ($playlist['mainPlaylist'] as $sequence) {
+            if (!$sequence['enabled']) {
+                continue;
+            }
+            $sequenceData[] = array_merge(
+                (array) getSequenceData($sequence['sequenceName']),
+                [ 'length' => $sequence['duration'] ]
+            );
+        }
+
         $postData = [
             'apiKey' => $apiKey,
             'list' => $sequenceData,
@@ -90,6 +89,7 @@ function postAutoplayPlaylist($apiKey = null, $playlist = null)
         curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $response = curl_exec($ch);
+        print_r($response);
         $responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
         file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/testResponse.txt", $response);
