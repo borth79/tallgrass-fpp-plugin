@@ -77,7 +77,7 @@ function postAutoplayPlaylist($apiKey = null, $playlist = null)
             'apiKey' => $apiKey,
             'list' => $sequenceData,
         ];
-        print_r($postData);
+        print_r(json_encode($postData));
         $url = "http://api.tallgrasslights.com/api/xlights/autoplay-list";
         $headers = [
             'Content-Type: application/json',
