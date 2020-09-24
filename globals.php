@@ -65,15 +65,16 @@ function postAutoplayPlaylist($apiKey = null, $playlist = null)
             'apiKey' => $apiKey,
             'list' => $playlist
         ];
+        print_r($postData);
         $url = "http://api.tallgrasslights.com/api/xlights/autoplay-list";
         $headers = [
             'Content-Type: application/x-www-form-urlencoded',
         ];
         $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
-        curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $response = curl_exec($ch);
         $responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
