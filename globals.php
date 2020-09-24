@@ -93,9 +93,9 @@ function postAutoplayPlaylist($apiKey = null, $playlist = null)
         print_r($response);
         $responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
-        file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/testResponse.txt", $response);
+//        file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/testResponse.txt", $response);
         file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/postAutoplayError.txt", 'code: ' . $responseCode . "\nresponse:\n" . $response);
-        return ['code' => $responseCode === 200, 'errors' => $errors];
+        return ['code' => $responseCode, 'errors' => $errors];
     } catch (Exception $exception) {
         echo '<div class="alert alert-danger">';
         print_r($exception->getMessage());
