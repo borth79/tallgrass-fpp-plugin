@@ -66,6 +66,7 @@ function postAutoplayPlaylist($apiKey = null, $playlist = null)
         if (!$sequence['enabled']) {
             continue;
         }
+        print_r(getSequenceData($sequence['sequenceName']));
         $sequenceData[] = array_merge(
             getSequenceData($sequence['sequenceName']),
             [ 'length' => $sequence['duration'] ]
