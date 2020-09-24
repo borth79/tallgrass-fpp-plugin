@@ -65,8 +65,12 @@ function postAutoplayPlaylist($playlist)
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        print_r(curl_exec($ch));
+        $response =curl_exec($ch);
+        print_r($response);
+        $info = curl_getinfo($ch);
+        print_r($info);
         curl_close($ch);
+        echo "NO ERROR";
     } catch (Exception $exception) {
         print_r($exception->getMessage());
     }

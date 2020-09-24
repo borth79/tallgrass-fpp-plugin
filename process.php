@@ -35,7 +35,6 @@ if ($_REQUEST['submission']) {
 
     file_put_contents($pluginPath . "/store.json", json_encode($save));
 
-    print_r(getPlaylistMeta($_REQUEST['autoplayPlaylist']));
     // send autoplayPlaylist
     postAutoplayPlaylist(getPlaylistMeta($_REQUEST['autoplayPlaylist']));
     // send fullPlaylist
