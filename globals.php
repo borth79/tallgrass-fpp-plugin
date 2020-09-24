@@ -61,7 +61,10 @@ function getAllSequences()
 function postAutoplayPlaylist($apiKey = null, $playlist = null)
 {
     try {
-        $postData = array_merge(['apiKey' => $apiKey], $playlist);
+        $postData = [
+            'apiKey' => $apiKey,
+            'list' => $playlist
+        ];
         $url = "http://api.tallgrasslights.com/api/xlights/autoplay-list";
         $headers = [
             'Content-Type: application/x-www-form-urlencoded',
@@ -77,15 +80,11 @@ function postAutoplayPlaylist($apiKey = null, $playlist = null)
         curl_close($ch);
         file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/testResponse.txt", $response);
         file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/postAutoplayError.txt", 'code: ' . $responseCode . "\nresponse:\n" . $response);
-        return json_decode( $response, true );
+        return $responseCode === 200;
     } catch (Exception $exception) {
         echo '<div class="alert alert-danger">';
         print_r($exception->getMessage());
         echo '</div>';
     }
-
-
-    echo "<br />Post Data:<br />";
-    print_r($playlist);
 
 }
