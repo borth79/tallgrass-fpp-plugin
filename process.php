@@ -43,4 +43,6 @@ if ($_REQUEST['submission']) {
     );
     // send fullPlaylist
     // send schedule
+    echo "ERRORS:<br />";
+    print_r($errors);
 } # if
