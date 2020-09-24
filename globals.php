@@ -62,7 +62,7 @@ function postAutoplayPlaylist($apiKey = null, $playlist = null)
 {
     try {
         $postData = array_merge(['apiKey' => $apiKey], $playlist);
-        $url = "http://api.borthlights.com/api/xlights/autoplay-list";
+        $url = "http://api.tallgrasslights.com/api/xlights/autoplay-list";
         $headers = [
             'Content-Type: application/x-www-form-urlencoded',
         ];
