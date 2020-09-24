@@ -60,7 +60,7 @@ function getAllSequences()
 
 function postAutoplayPlaylist($playlist)
 {
-    $url = "http://api.borthlights.com/api/show/show-status";
+    $url = "http://api.tallgrasslights.com/api/show/show-status";
     try {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
