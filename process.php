@@ -1,4 +1,5 @@
 <?php
+global $errors;
 
 $store = json_decode(file_get_contents($pluginPath . "/store.json"));
 $options = [
