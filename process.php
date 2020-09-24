@@ -20,7 +20,6 @@ if ($_REQUEST['submission']) {
     ];
 
     $schedules = getSchedules();
-    print_r($schedules);
 
     // process schedule
     $selectedSchedule = null;

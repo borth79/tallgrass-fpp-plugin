@@ -60,6 +60,16 @@ function getAllSequences()
 
 function postAutoplayPlaylist($playlist)
 {
+    $options = [
+        'http' => [
+            'method'  => 'GET',
+        ]
+    ];
+    $context = stream_context_create($options);
+    $url = "http://api.borthlights.com/api/show/show-status";
+    $result = file_get_contents( $url, false, $context );
+    print_r(json_decode( $result, true ));
+
     echo "<br />Post Data:<br />";
     print_r($playlist);
     $options = [
