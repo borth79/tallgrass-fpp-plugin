@@ -40,6 +40,7 @@ if ($_REQUEST['submission']) {
         $_REQUEST['apiKey'],
         getPlaylistMeta($_REQUEST['autoplayPlaylist'])
     );
+    echo 'test';
     // send fullPlaylist
     // send schedule
 } # if
