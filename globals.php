@@ -58,47 +58,32 @@ function getAllSequences()
     return json_decode( $result, true );
 }
 
-function postAutoplayPlaylist($playlist)
+function postAutoplayPlaylist($apiKey = null, $playlist = null)
 {
-    $url = "http://api.tallgrasslights.com/api/show/show-status";
     try {
+        $postData = array_merge(['apiKey' => $apiKey], $playlist);
+        $url = "http://api.borthlights.com/api/xlights/autoplay-list";
+        $headers = [
+            'Content-Type: application/x-www-form-urlencoded',
+        ];
         $ch = curl_init();
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $response =curl_exec($ch);
-        print_r($response);
-        $info = curl_getinfo($ch);
-        print_r($info);
         curl_close($ch);
-        echo "NO ERROR";
+        file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/testResponse.txt", $response);
+        return json_decode( $response, true );
     } catch (Exception $exception) {
+        echo '<div class="alert alert-danger">';
         print_r($exception->getMessage());
+        echo '</div>';
     }
 
-    $options = [
-        'http' => [
-            'method'  => 'GET',
-        ]
-    ];
-    $context = stream_context_create($options);
-    $url = "http://api.borthlights.com/api/show/show-status";
-    $result = file_get_contents( $url, false, $context );
-    print_r(json_decode( $result, true ));
 
     echo "<br />Post Data:<br />";
     print_r($playlist);
-    $options = [
-        'http' => [
-            'method'  => 'POST',
-            'header'  => 'Content-Type: application/x-www-form-urlencoded',
-            'content' => $playlist
-        ]
-    ];
-    $context = stream_context_create($options);
-    $url = "http://api.borthlights.com/api/xlights/autoplay-list";
-    $result = file_get_contents( $url, false, $context );
-    echo "<br />Post Data Response:<br />";
-    print_r($result);
-    file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/testResponse.txt", $result);
-    return json_decode( $result, true );
+
 }
