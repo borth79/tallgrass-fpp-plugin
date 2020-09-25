@@ -15,7 +15,6 @@ function getFppStatus() {
 }
 
 while(true) {
-    file_put_contents($pluginPath . "/test1.json", 'test');
     $fppStatus = getFppStatus();
     $currentlyPlaying = $fppStatus->current_sequence;
     $fppd = $fppStatus->fppd;
@@ -23,12 +22,13 @@ while(true) {
     $currentlyPlayingStatus = $fppStatus->scheduler->status;
     $currentStatus = $fppStatus->status;
 
+    $sequecneData = getSequenceData($currentlyPlaying);
+    file_put_contents($pluginPath . "/test1.json", $sequecneData);
+
     $save = [
-        'fppStatus' => $fppStatus,
         'currentlyPlaying' => $currentlyPlaying,
         'fppd' => $fppd,
         'scheduler' => $scheduler,
-        'currentlyPlayingStatus' => $currentlyPlayingStatus,
         'currentStatus' => $fppStatus->status,
     ];
     file_put_contents($pluginPath . "/test.json", json_encode($save));
