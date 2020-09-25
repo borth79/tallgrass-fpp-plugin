@@ -86,6 +86,7 @@ function postPlaylist($apiKey = null, $playlist = null, $type = 'full')
         $headers = [
             'Content-Type: application/json',
         ];
+        print_r($postData);
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
