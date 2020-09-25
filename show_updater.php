@@ -1,6 +1,10 @@
 <?php
 require_once "globals.php";
 
+$pluginPath = "/home/fpp/media/plugins/tallgrass-fpp-plugin";
+$store = json_decode(file_get_contents($pluginPath . "/store.json"));
+$apiKey = $store->apiKey;
+
 function getFppStatus() {
     $options = [
         'http' => [
