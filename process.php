@@ -37,10 +37,20 @@ if ($_REQUEST['submission']) {
 
     file_put_contents($pluginPath . "/store.json", json_encode($save));
 
-    // send autoplayPlaylist
-    $autoplayResponse = postAutoplayPlaylist(
+    # PROCESS THE SONG LIST BEFORE THE AUTOPLAY LIST - AUTOPLAY IS DEPENDENT ON SONG LIST
+    $fullPlaylistResponse = postPlaylist(
         $_REQUEST['apiKey'],
-        getPlaylistMeta($_REQUEST['autoplayPlaylist'])
+        getPlaylistMeta($_REQUEST['fullPlaylist']),
+        'full'
+    );
+    $errors = array_merge($errors, $fullPlaylistResponse['errors']);
+
+
+    // send autoplayPlaylist
+    $autoplayResponse = postPlaylist(
+        $_REQUEST['apiKey'],
+        getPlaylistMeta($_REQUEST['autoplayPlaylist']),
+        'auto'
     );
     $errors = array_merge($errors, $autoplayResponse['errors']);
     // send fullPlaylist

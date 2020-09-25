@@ -58,7 +58,7 @@ function getAllSequences()
     return json_decode( $result, true );
 }
 
-function postAutoplayPlaylist($apiKey = null, $playlist = null)
+function postPlaylist($apiKey = null, $playlist = null, $type = 'full')
 {
     try {
         # MUST PULL META DATA FROM SEQUENCE
@@ -77,7 +77,12 @@ function postAutoplayPlaylist($apiKey = null, $playlist = null)
             'apiKey' => $apiKey,
             'list' => $sequenceData,
         ];
-        $url = "http://api.tallgrasslights.com/api/xlights/autoplay-list";
+        switch ($type) {
+            case 'auto': $url = "http://api.tallgrasslights.com/api/xlights/autoplay-list";
+                break;
+            case 'full': $url = "http://api.tallgrasslights.com/api/xlights/song-list";
+                break;
+        }
         $headers = [
             'Content-Type: application/json',
         ];
