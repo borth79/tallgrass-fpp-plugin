@@ -105,7 +105,7 @@ function postPlaylist($apiKey = null, $playlist = null, $type = 'full')
                 file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/postSongListResponse.txt", 'code: ' . $responseCode . "\nresponse:\n" . json_encode($response));
                 break;
         }
-
+        print_r($errors);
         return ['code' => $responseCode, 'errors' => $errors];
     } catch (Exception $exception) {
         echo '<div class="alert alert-danger">';
