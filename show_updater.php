@@ -26,13 +26,13 @@ while(true) {
 
     $sequecneData = getSequenceData($currentlyPlaying);
     file_put_contents($pluginPath . "/responseTest1.json", json_encode($sequecneData));
-//
-//    $save = [
-//        'currentlyPlaying' => $currentlyPlaying,
-//        'fppd' => $fppd,
-//        'scheduler' => $scheduler,
-//        'currentStatus' => $fppStatus->status,
-//    ];
-//    file_put_contents($pluginPath . "/responseTest.json", json_encode($save));
+
+    $save = [
+        'currentlyPlaying' => $currentlyPlaying,
+        'fppd' => $fppd,
+        'scheduler' => $scheduler,
+        'currentStatus' => $fppStatus->status,
+    ];
+    file_put_contents($pluginPath . "/responseTest.json", json_encode($save));
     sleep(10);
 }
