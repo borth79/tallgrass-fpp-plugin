@@ -93,7 +93,7 @@ function postSchedule($apiKey=null, $fullPlaylist=null)
 
     $postData = [
         'apiKey' => $apiKey,
-        'list' => $activeSchedules,
+        'schedule' => $activeSchedules,
     ];
     file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/postScheduleData.txt", json_encode($postData));
     $ch = curl_init();
