@@ -16,8 +16,8 @@ function getFppStatus() {
 
 while(true) {
     $fppStatus = getFppStatus();
-    file_put_contents($pluginPath . "/responseTest1.json", json_encode($fppStatus));
-    continue;
+//    file_put_contents($pluginPath . "/responseTest1.json", json_encode($fppStatus));
+//    continue;
     $currentlyPlaying = $fppStatus->current_sequence;
     $fppd = $fppStatus->fppd;
     $scheduler = $fppStatus->scheduler;
