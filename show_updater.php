@@ -20,6 +20,7 @@ while(true) {
     // get store again in case the the apiKey is updated
     $store = json_decode(file_get_contents($pluginPath . "/store.json"));
 
+    file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/test6.txt", date('H:i:s'));
     $fppStatus = getFppStatus();
     if (!$fppStatus) {
         continue;
