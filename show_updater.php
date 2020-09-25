@@ -15,24 +15,24 @@ function getFppStatus() {
     return json_decode( $result );
 }
 
-while(true) {
-    $fppStatus = getFppStatus();
-//    file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/test4.txt", json_encode($fppStatus));
-    $currentlyPlaying = $fppStatus->current_sequence;
-    $fppd = $fppStatus->fppd;
-    $scheduler = $fppStatus->scheduler;
-    $currentlyPlayingStatus = $fppStatus->scheduler->status;
-    $currentStatus = $fppStatus->status;
-
-//    $sequecneData = getSequenceData($currentlyPlaying);
-    #file_put_contents($pluginPath . "/responseTest1.json", json_encode($sequecneData));
-
-    $save = [
-        'currentlyPlaying' => $currentlyPlaying,
-        'fppd' => $fppd,
-        'scheduler' => $scheduler,
-        'currentStatus' => $fppStatus->status,
-    ];
-    file_put_contents($pluginPath . "/responseTest.json", json_encode($save));
-    sleep(10);
-}
+//while(true) {
+//    $fppStatus = getFppStatus();
+////    file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/test4.txt", json_encode($fppStatus));
+//    $currentlyPlaying = $fppStatus->current_sequence;
+//    $fppd = $fppStatus->fppd;
+//    $scheduler = $fppStatus->scheduler;
+//    $currentlyPlayingStatus = $fppStatus->scheduler->status;
+//    $currentStatus = $fppStatus->status;
+//
+////    $sequecneData = getSequenceData($currentlyPlaying);
+//    #file_put_contents($pluginPath . "/responseTest1.json", json_encode($sequecneData));
+//
+//    $save = [
+//        'currentlyPlaying' => $currentlyPlaying,
+//        'fppd' => $fppd,
+//        'scheduler' => $scheduler,
+//        'currentStatus' => $fppStatus->status,
+//    ];
+//    file_put_contents($pluginPath . "/responseTest.json", json_encode($save));
+//    sleep(10);
+//}
