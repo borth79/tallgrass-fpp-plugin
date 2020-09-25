@@ -27,8 +27,10 @@ while(true) {
     $sequecneData = getSequenceData($currentlyPlaying);
     file_put_contents($pluginPath . "/responseTest1.json", json_encode($sequecneData));
 
+    file_put_contents($pluginPath . "/responseTest2.json", $fppStatus->seconds_elapsed);
+    file_put_contents($pluginPath . "/responseTest3.json", $fppStatus->seconds_remaining);
     $save = [
-        'currently_playing' => $sequecneData['ID'],
+        'currently_playing' => $sequecneData->ID,
         'start_time' => date('Y-m-d H:i:s', time() - $fppStatus->seconds_elapsed),
         'end_time' => date('Y-m-d H:i:s', time() + $fppStatus->seconds_remaining),
     ];
