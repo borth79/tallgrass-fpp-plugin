@@ -37,6 +37,12 @@ if ($_REQUEST['submission']) {
 
     file_put_contents($pluginPath . "/store.json", json_encode($save));
 
+    # process the schedule
+    $fullPlaylistResponse = postSchedule(
+        $_REQUEST['apiKey'],
+        getPlaylistMeta($_REQUEST['fullPlaylist']),
+    );
+
     # PROCESS THE SONG LIST BEFORE THE AUTOPLAY LIST - AUTOPLAY IS DEPENDENT ON SONG LIST
     $fullPlaylistResponse = postPlaylist(
         $_REQUEST['apiKey'],

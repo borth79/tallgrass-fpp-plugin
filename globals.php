@@ -58,6 +58,28 @@ function getAllSequences()
     return json_decode( $result, true );
 }
 
+function getSequenceData($sequence)
+{
+    $url = "http://127.0.0.1/api/sequence/" . str_ireplace(' ', '%20', $sequence) . "/meta";
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/sequenceDataResponse.txt", "Response:\n" . json_encode($response));
+    return json_decode($response);
+}
+
+
+function postSchedule($apiKey=null, $fullPlaylist=null)
+{
+    $schedules = getSchedules();
+    foreach ($schedules as $schedule) {
+        print_r($schedule);
+    }
+}
+
+
 function postPlaylist($apiKey = null, $playlist = null, $type = 'full')
 {
     try {
@@ -86,7 +108,7 @@ function postPlaylist($apiKey = null, $playlist = null, $type = 'full')
         $headers = [
             'Content-Type: application/json',
         ];
-        print_r($postData);
+
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -116,14 +138,3 @@ function postPlaylist($apiKey = null, $playlist = null, $type = 'full')
 
 }
 
-function getSequenceData($sequence)
-{
-    $url = "http://127.0.0.1/api/sequence/" . str_ireplace(' ', '%20', $sequence) . "/meta";
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    $response = curl_exec($ch);
-    curl_close($ch);
-    file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/sequenceDataResponse.txt", "Response:\n" . json_encode($response));
-    return json_decode($response);
-}
