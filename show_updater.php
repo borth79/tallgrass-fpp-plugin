@@ -30,7 +30,7 @@ while(true) {
     $save = [
         'currentlyPlaying' => $sequecneData['ID'],
         'start_time' => date('Y-m-d H:i:s', time() - $fppStatus->seconds_elapsed),
-        'end_time' => date('Y-m-d H:i:s', time() - $fppStatus->seconds_remaining),
+        'end_time' => date('Y-m-d H:i:s', time() + $fppStatus->seconds_remaining),
     ];
     file_put_contents($pluginPath . "/responseTest.json", json_encode($save));
     sleep(10);
