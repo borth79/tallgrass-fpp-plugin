@@ -75,17 +75,4 @@ $sequences = getAllSequences();
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
-<?php
-foreach ($sequences as $name) {
-    $url = "http://127.0.0.1/api/sequence/" . $name . "/meta";
-    $result = file_get_contents( $url, false, $context );
-    print_r($result);
-    $responseMeta = json_decode( $result, true );
-    print_r($responseMeta);
-}
-?>
-
-<?php
-//    print_r($selectedSchedule);
-?>
 </div>
