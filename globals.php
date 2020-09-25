@@ -80,7 +80,6 @@ function postSchedule($apiKey=null, $fullPlaylist=null)
         if ($schedule['enabled'] !== 1) {
             continue;
         }
-        echo $schedules['playlist'] .':' . $fullPlaylist;
         if ($schedule['playlist'] !== $fullPlaylist) {
             continue;
         }
