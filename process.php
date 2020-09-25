@@ -40,7 +40,7 @@ if ($_REQUEST['submission']) {
     # process the schedule
     $fullPlaylistResponse = postSchedule(
         $_REQUEST['apiKey'],
-        getPlaylistMeta($_REQUEST['fullPlaylist']),
+        $_REQUEST['fullPlaylist']
     );
 
     # PROCESS THE SONG LIST BEFORE THE AUTOPLAY LIST - AUTOPLAY IS DEPENDENT ON SONG LIST
