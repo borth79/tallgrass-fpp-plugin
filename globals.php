@@ -4,6 +4,9 @@ global $scriptPath;
 $pluginPath = "/home/fpp/media/plugins/tallgrass-fpp-plugin";
 $scriptPath = $pluginPath . "/scripts";
 
+$store = json_decode(file_get_contents($pluginPath . "/store.json"));
+$apiKey = $store->apiKey;
+
 
 function getSchedules() {
     $url = "http://127.0.0.1/api/schedule";

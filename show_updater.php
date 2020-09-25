@@ -25,15 +25,30 @@ while(true) {
     $currentStatus = $fppStatus->status;
 
     $sequecneData = getSequenceData($currentlyPlaying);
-    file_put_contents($pluginPath . "/responseTest1.json", json_encode($sequecneData));
 
-    file_put_contents($pluginPath . "/responseTest2.json", $fppStatus->seconds_elapsed);
-    file_put_contents($pluginPath . "/responseTest3.json", $fppStatus->seconds_remaining);
-    $save = [
-        'currently_playing' => $sequecneData->ID,
+    $postData = [
+        'apiKey' => $apiKey,
+        'song_id' => $sequecneData->ID,
         'start_time' => date('Y-m-d H:i:s', time() - $fppStatus->seconds_elapsed),
         'end_time' => date('Y-m-d H:i:s', time() + $fppStatus->seconds_remaining),
     ];
-    file_put_contents($pluginPath . "/responseTest.json", json_encode($save));
+    file_put_contents($pluginPath . "/currentlyPlayingPostData.json", json_encode($postData));
+
+    $url = "http://api.tallgrasslights.com/api/xlights/currently-playing";
+    $headers = [
+        'Content-Type: application/json',
+    ];
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($postData));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    $response = json_decode(curl_exec($ch));
+    $responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    file_put_contents($pluginPath . "/currentlyPlayingResponseData.json", $response);
+
     sleep(10);
 }
