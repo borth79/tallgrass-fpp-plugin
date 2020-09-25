@@ -86,7 +86,30 @@ function postSchedule($apiKey=null, $fullPlaylist=null)
         }
         $activeSchedules[] = $schedule;
     }
-    print_r($activeSchedules);
+    $url = "http://api.tallgrasslights.com/api/xlights/show-schedule";
+
+    $headers = [
+        'Content-Type: application/json',
+    ];
+
+    $postData = [
+        'apiKey' => $apiKey,
+        'list' => $activeSchedules,
+    ];
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($postData));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    $response = json_decode(curl_exec($ch));
+    $responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    $errors = (isset($response->errors)) ? $response->errors : [];
+    file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/postScheduleResponse.txt", 'code: ' . $responseCode . "\nresponse:\n" . json_encode($response));
+
+    return ['code' => $responseCode, 'errors' => $errors];
 }
 
 
