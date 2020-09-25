@@ -13,7 +13,7 @@ function getFppStatus() {
     $url = "http://127.0.0.1/api/fppd/status";
     $result = file_get_contents( $url, false, $context );
     file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/test4.txt", $result);
-    return (!empty($result)) ? $result : null;
+    return $result;
 }
 
 while(true) {
@@ -22,7 +22,7 @@ while(true) {
 
     file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/test6.txt", date('H:i:s'));
     $fppStatus = getFppStatus();
-    if (!$fppStatus) {
+    if ($fppStatus->status !== 1) {
         continue;
     }
     file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/test5.txt", date('H:i:s'));
