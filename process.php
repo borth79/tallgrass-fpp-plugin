@@ -53,7 +53,7 @@ if ($_REQUEST['submission']) {
         'auto'
     );
     print_r($autoplayResponse['errors']);
-    $errors = (count($errors)) ? array_merge($errors, $autoplayResponse['errors']) : $autoplayResponse['errors'];
+    $errors = array_merge($errors, $autoplayResponse['errors']);
     print_r($errors);
 
     // send fullPlaylist
