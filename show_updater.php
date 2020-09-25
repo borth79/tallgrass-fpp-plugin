@@ -36,7 +36,7 @@ while(true) {
 
     $postData = [
         'apiKey' => $store->apiKey,
-        'song_id' => $sequecneData['ID'],
+        'song_id' => $sequecneData->ID,
         'start_time' => date('Y-m-d H:i:s', time() - $fppStatus->seconds_elapsed),
         'end_time' => date('Y-m-d H:i:s', time() + $fppStatus->seconds_remaining),
     ];
