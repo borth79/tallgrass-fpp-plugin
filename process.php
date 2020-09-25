@@ -43,18 +43,14 @@ if ($_REQUEST['submission']) {
         getPlaylistMeta($_REQUEST['fullPlaylist']),
         'full'
     );
-    print_r($fullPlaylistResponse['errors']);
-    $errors = (count($errors)) ? array_merge($errors, $fullPlaylistResponse['errors']) : $fullPlaylistResponse['errors'];
-    print_r($errors);
+    $errors = array_merge($errors, $fullPlaylistResponse['errors']);
     // send autoplayPlaylist
     $autoplayResponse = postPlaylist(
         $_REQUEST['apiKey'],
         getPlaylistMeta($_REQUEST['autoplayPlaylist']),
         'auto'
     );
-    print_r($autoplayResponse['errors']);
     $errors = array_merge($errors, $autoplayResponse['errors']);
-    print_r($errors);
 
     // send fullPlaylist
     // send schedule
