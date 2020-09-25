@@ -43,9 +43,8 @@ if ($_REQUEST['submission']) {
         getPlaylistMeta($_REQUEST['fullPlaylist']),
         'full'
     );
-    print_r($errors);
+
     $errors = array_merge($errors, $fullPlaylistResponse['errors']);
-    print_r($errors);
 
     // send autoplayPlaylist
     $autoplayResponse = postPlaylist(
@@ -53,7 +52,7 @@ if ($_REQUEST['submission']) {
         getPlaylistMeta($_REQUEST['autoplayPlaylist']),
         'auto'
     );
-//    $errors = array_merge($errors, $autoplayResponse['errors']);
+    $errors = array_merge($errors, $autoplayResponse['errors']);
     // send fullPlaylist
     // send schedule
 } # if
