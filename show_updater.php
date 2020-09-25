@@ -11,6 +11,7 @@ function getFppStatus() {
 
     $url = "http://127.0.0.1/api/fppd/status";
     $result = file_get_contents( $url, false, $context );
+    file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/test4.txt", $result);
     return json_decode( $result );
 }
 
