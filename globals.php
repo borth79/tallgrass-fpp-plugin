@@ -2,7 +2,6 @@
 global $pluginPath;
 global $scriptPath;
 $pluginPath = "/home/fpp/media/plugins/tallgrass-fpp-plugin";
-$responsePath = $pluginPath . "/responses";
 $scriptPath = $pluginPath . "/scripts";
 
 
@@ -67,7 +66,7 @@ function getSequenceData($sequence)
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     $response = curl_exec($ch);
     curl_close($ch);
-    file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/responses/sequenceDataResponse.txt", "Response:\n" . json_encode($response));
+    file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/responseSequenceDataResponse.txt", "Response:\n" . json_encode($response));
     return json_decode($response);
 }
 
@@ -96,7 +95,7 @@ function postSchedule($apiKey=null, $fullPlaylist=null)
         'apiKey' => $apiKey,
         'schedule' => $activeSchedules,
     ];
-    file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/responses/postScheduleData.txt", json_encode($postData));
+    file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/responsePostScheduleData.txt", json_encode($postData));
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -108,7 +107,7 @@ function postSchedule($apiKey=null, $fullPlaylist=null)
     curl_close($ch);
 
     $errors = (isset($response->errors)) ? $response->errors : [];
-    file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/postScheduleResponse.txt", 'code: ' . $responseCode . "\nresponse:\n" . json_encode($response));
+    file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/responsePostScheduleResponse.txt", 'code: ' . $responseCode . "\nresponse:\n" . json_encode($response));
 
     return ['code' => $responseCode, 'errors' => $errors];
 }
@@ -156,10 +155,10 @@ function postPlaylist($apiKey = null, $playlist = null, $type = 'full')
         $errors = (isset($response->errors)) ? $response->errors : [];
         switch ($type) {
             case 'auto':
-                file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/responses/postAutoplayResponse.txt", 'code: ' . $responseCode . "\nresponse:\n" . json_encode($response));
+                file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/responsePostAutoplayResponse.txt", 'code: ' . $responseCode . "\nresponse:\n" . json_encode($response));
                 break;
             case 'full':
-                file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/responses/postSongListResponse.txt", 'code: ' . $responseCode . "\nresponse:\n" . json_encode($response));
+                file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/responsePostSongListResponse.txt", 'code: ' . $responseCode . "\nresponse:\n" . json_encode($response));
                 break;
         }
 

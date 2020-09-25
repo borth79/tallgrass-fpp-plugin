@@ -23,7 +23,7 @@ while(true) {
     $currentStatus = $fppStatus->status;
 
     $sequecneData = getSequenceData($currentlyPlaying);
-    file_put_contents($responsePath . "/test1.json", json_encode($sequecneData));
+    file_put_contents($pluginPath . "/responseTest1.json", json_encode($save));
 
     $save = [
         'currentlyPlaying' => $currentlyPlaying,
@@ -31,6 +31,6 @@ while(true) {
         'scheduler' => $scheduler,
         'currentStatus' => $fppStatus->status,
     ];
-    file_put_contents($responsePath . "/test.json", json_encode($save));
+    file_put_contents($pluginPath . "/responseTest.json", json_encode($save));
     sleep(10);
 }
