@@ -55,6 +55,7 @@ if ($_REQUEST['submission']) {
     print_r($errors);
     $errors = array_merge($errors, $autoplayResponse['errors']);
     print_r($errors);
+    $errors[] = 'abc';
     // send fullPlaylist
     // send schedule
 } # if
