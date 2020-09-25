@@ -15,8 +15,8 @@ function getFppStatus() {
     return json_decode( $result );
 }
 
-//while(true) {
-//    $fppStatus = getFppStatus();
+while(true) {
+    $fppStatus = getFppStatus();
 ////    file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/test4.txt", json_encode($fppStatus));
 //    $currentlyPlaying = $fppStatus->current_sequence;
 //    $fppd = $fppStatus->fppd;
@@ -34,5 +34,5 @@ function getFppStatus() {
 //        'currentStatus' => $fppStatus->status,
 //    ];
 //    file_put_contents($pluginPath . "/responseTest.json", json_encode($save));
-//    sleep(10);
-//}
+    sleep(10);
+}
