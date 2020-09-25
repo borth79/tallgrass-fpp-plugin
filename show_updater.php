@@ -3,17 +3,15 @@ require_once "globals.php";
 
 
 function getFppStatus() {
-    $options = [
-        'http' => [
-            'method'  => 'GET',
-        ]
-    ];
-    $context = stream_context_create( $options );
-
     $url = "http://127.0.0.1/api/fppd/status";
-    $result = file_get_contents( $url, false, $context );
-    file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/test4.txt", $result);
-    return json_decode($result);
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    $response = curl_exec($ch);
+    curl_close($ch);
+
+    file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/test4.txt", $response);
+    return json_decode($response);
 }
 
 while(true) {
