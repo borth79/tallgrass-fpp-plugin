@@ -13,14 +13,26 @@ function getFppStatus() {
     return json_decode($response);
 }
 
+function saveData($step, $data, $reset = false) {
+    $file = "/home/fpp/media/plugins/tallgrass-fpp-plugin/xShowUpdater.txt";
+    $fileData = '';
+    if ($reset !== false) {
+        $fileData = file_get_contents($file);
+    }
+    $fileData .= "\n\nStep: " . $step ."\n";
+    $fileData .= $data;
+    file_put_contents($file, $fileData);
+}
+
 while(true) {
     // get store again in case the the apiKey is updated
     $store = json_decode(file_get_contents($pluginPath . "/store.json"));
+    saveData('Start while loop', '', true);
 
     $fppStatus = getFppStatus();
     $currentStatus = $fppStatus->status;
     if ($currentStatus !== 1) {
-        file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/lastShowStatus.txt", 'Show Status:' . json_encode($fppStatus));
+        saveData('Check show status', $currentStatus, false);
         continue;
     }
     $currentlyPlaying = $fppStatus->current_sequence;
@@ -37,7 +49,7 @@ while(true) {
         'start_time' => date('Y-m-d H:i:s', time() - $fppStatus->seconds_elapsed),
         'end_time' => date('Y-m-d H:i:s', time() + $fppStatus->seconds_remaining),
     ];
-    file_put_contents($pluginPath . "/currentlyPlayingPostData.json", json_encode($postData));
+    saveData('Post data to tallgrasslights', json_encode($postData), false);
 
     $url = "http://api.tallgrasslights.com/api/xlights/currently-playing";
     $headers = [
@@ -53,7 +65,7 @@ while(true) {
     $responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
 
-    file_put_contents($pluginPath . "/currentlyPlayingResponseData.json", $response);
+    saveData('Response from tallgrasslights', json_encode($response), false);
 
     sleep(10);
 }
