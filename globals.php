@@ -58,8 +58,11 @@ function getAllSequences()
     return json_decode( $result, true );
 }
 
-function getSequenceData($sequence)
+function getSequenceData($sequence=null)
 {
+    if ($sequence === null) {
+        return json_decode([]);
+    }
     file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/test3.txt", $sequence);
     $url = "http://127.0.0.1/api/sequence/" . str_ireplace(' ', '%20', $sequence) . "/meta";
     $ch = curl_init();
