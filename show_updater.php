@@ -24,7 +24,7 @@ while(true) {
     if (!$fppStatus) {
         continue;
     }
-    file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/test4.txt", $fppStatus);
+    file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/test5.txt", date('H:i:s'));
     $currentlyPlaying = $fppStatus->current_sequence;
     $fppd = $fppStatus->fppd;
     $scheduler = $fppStatus->scheduler;
