@@ -93,17 +93,16 @@ function postPlaylist($apiKey = null, $playlist = null, $type = 'full')
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($postData));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $response = json_decode(curl_exec($ch));
-        $errors = (isset($response->errors)) ? $response->errors : false;
         $responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
-//        file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/testResponse.txt", json_encode($response));
 
+        $errors = (isset($response->errors)) ? $response->errors : false;
         switch ($type) {
             case 'auto':
-                file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/postAutoplayError.txt", 'code: ' . $responseCode . "\nresponse:\n" . json_encode($response));
+                file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/postAutoplayResponse.txt", 'code: ' . $responseCode . "\nresponse:\n" . json_encode($response));
                 break;
             case 'full':
-                file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/postSongListError.txt", 'code: ' . $responseCode . "\nresponse:\n" . json_encode($response));
+                file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/postSongListResponse.txt", 'code: ' . $responseCode . "\nresponse:\n" . json_encode($response));
                 break;
         }
 
@@ -118,11 +117,12 @@ function postPlaylist($apiKey = null, $playlist = null, $type = 'full')
 
 function getSequenceData($sequence)
 {
-    $url = "http://127.0.0.1/api/sequence/" . str_ireplace(' ', '%20', $sequence) . "/meta";
+    $url = "http://127.0.0.1/api/sequence/" . str_ireplace(' ', '%20', $sequence) . "";
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     $response = curl_exec($ch);
     curl_close($ch);
+    file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/sequenceDataResponse.txt", "Response:\n" . json_encode($response));
     return json_decode($response);
 }
