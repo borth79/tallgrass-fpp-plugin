@@ -23,7 +23,7 @@ while(true) {
     $currentStatus = $fppStatus->status;
 
     $sequecneData = getSequenceData($currentlyPlaying);
-    file_put_contents($pluginPath . "/responseTest1.json", json_encode($sequecneData));
+    #file_put_contents($pluginPath . "/responseTest1.json", json_encode($sequecneData));
 
     $save = [
         'currentlyPlaying' => $currentlyPlaying,

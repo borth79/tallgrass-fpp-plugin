@@ -60,6 +60,7 @@ function getAllSequences()
 
 function getSequenceData($sequence)
 {
+    print_r($sequence);
     $url = "http://127.0.0.1/api/sequence/" . str_ireplace(' ', '%20', $sequence) . "/meta";
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
@@ -67,6 +68,7 @@ function getSequenceData($sequence)
     $response = curl_exec($ch);
     curl_close($ch);
     file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/responseSequenceDataResponse.txt", "Response:\n" . json_encode($response));
+    print_r(json_decode($response));
     return json_decode($response);
 }
 
