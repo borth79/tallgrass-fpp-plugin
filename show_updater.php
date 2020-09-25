@@ -17,7 +17,7 @@ function getFppStatus() {
 
 while(true) {
     $fppStatus = getFppStatus();
-////    file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/test4.txt", json_encode($fppStatus));
+    file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/test4.txt", json_encode($fppStatus));
 //    $currentlyPlaying = $fppStatus->current_sequence;
 //    $fppd = $fppStatus->fppd;
 //    $scheduler = $fppStatus->scheduler;
