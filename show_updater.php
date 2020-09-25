@@ -23,6 +23,7 @@ while(true) {
     file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/test6.txt", date('H:i:s'));
     $fppStatus = getFppStatus();
     if ($fppStatus->status !== 1) {
+        file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/test7.txt", date('H:i:s'));
         continue;
     }
     file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/test5.txt", date('H:i:s'));
