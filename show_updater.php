@@ -24,7 +24,7 @@ while(true) {
     $fppStatus = getFppStatus();
     $currentStatus = $fppStatus->status;
     if ($currentStatus !== 1) {
-        file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/test7.txt", 'Show Status:' . $currentStatus);
+        file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/test7.txt", 'Show Status:' . json_encode($fppStatus));
         continue;
     }
     file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/test5.txt", date('H:i:s'));
