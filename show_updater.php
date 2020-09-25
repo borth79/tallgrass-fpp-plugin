@@ -1,9 +1,6 @@
 <?php
 require_once "globals.php";
 
-$pluginPath = "/home/fpp/media/plugins/tallgrass-fpp-plugin";
-$store = json_decode(file_get_contents($pluginPath . "/store.json"));
-$apiKey = $store->apiKey;
 
 function getFppStatus() {
     $options = [
@@ -20,6 +17,9 @@ function getFppStatus() {
 }
 
 while(true) {
+    // get store again in case the the apiKey is updated
+    $store = json_decode(file_get_contents($pluginPath . "/store.json"));
+
     $fppStatus = getFppStatus();
     $currentlyPlaying = $fppStatus->current_sequence;
     file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/test4.txt", $currentlyPlaying);
@@ -31,7 +31,7 @@ while(true) {
     $sequecneData = getSequenceData($currentlyPlaying);
 
     $postData = [
-        'apiKey' => $apiKey,
+        'apiKey' => $store->apiKey,
         'song_id' => $sequecneData->ID,
         'start_time' => date('Y-m-d H:i:s', time() - $fppStatus->seconds_elapsed),
         'end_time' => date('Y-m-d H:i:s', time() + $fppStatus->seconds_remaining),
