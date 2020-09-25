@@ -74,9 +74,15 @@ function getSequenceData($sequence)
 function postSchedule($apiKey=null, $fullPlaylist=null)
 {
     $schedules = getSchedules();
+    $activeSchedules = [];
+    // get the first matching schedule
     foreach ($schedules as $schedule) {
-        print_r($schedule);
+        if ($schedule['enabled'] !== 1) {
+            continue;
+        }
+        $activeSchedules[] = $schedule;
     }
+    print_r($activeSchedules);
 }
 
 
