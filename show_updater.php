@@ -22,8 +22,9 @@ while(true) {
 
     file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/test6.txt", date('H:i:s'));
     $fppStatus = getFppStatus();
-    if ($fppStatus->status !== 1) {
-        file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/test7.txt", 'Show Status:' . $fppStatus->status);
+    $currentStatus = $fppStatus->status;
+    if ($currentStatus !== 1) {
+        file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/test7.txt", 'Show Status:' . $currentStatus);
         continue;
     }
     file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/test5.txt", date('H:i:s'));
@@ -31,7 +32,7 @@ while(true) {
     $fppd = $fppStatus->fppd;
     $scheduler = $fppStatus->scheduler;
     $currentlyPlayingStatus = $fppStatus->scheduler->status;
-    $currentStatus = $fppStatus->status;
+
 
     $sequecneData = getSequenceData($currentlyPlaying);
 
