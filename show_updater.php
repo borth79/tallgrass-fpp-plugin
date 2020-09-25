@@ -28,10 +28,9 @@ while(true) {
     file_put_contents($pluginPath . "/responseTest1.json", json_encode($sequecneData));
 
     $save = [
-        'currentlyPlaying' => $currentlyPlaying,
-        'fppd' => $fppd,
-        'scheduler' => $scheduler,
-        'currentStatus' => $fppStatus->status,
+        'currentlyPlaying' => $sequecneData['ID'],
+        'start_time' => date('Y-m-d H:i:s', time() - $fppStatus->seconds_elapsed),
+        'end_time' => date('Y-m-d H:i:s', time() - $fppStatus->seconds_remaining),
     ];
     file_put_contents($pluginPath . "/responseTest.json", json_encode($save));
     sleep(10);
