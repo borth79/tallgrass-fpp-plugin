@@ -16,7 +16,7 @@ function getFppStatus() {
 function saveData($step, $data, $reset = false) {
     $file = "/home/fpp/media/plugins/tallgrass-fpp-plugin/xShowUpdater.txt";
     $fileData = '';
-    if ($reset !== false) {
+    if ($reset === false) {
         $fileData = file_get_contents($file);
     }
     $fileData .= "\n\nStep: " . $step ."\n";
