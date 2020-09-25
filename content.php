@@ -33,6 +33,7 @@ $sequences = getAllSequences();
     <?php if (isset($errors) && count($errors)) { ?>
     <div class="alert alert-danger">
         <div class="font-weight-bold">Errors:</div>
+        <?php print_r($errors); ?>
         <?=implode('<br />', $errors);?>
     </div>
     <?php } ?>
