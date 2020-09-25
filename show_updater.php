@@ -27,7 +27,7 @@ function saveData($step, $data, $reset = false) {
 while(true) {
     // get store again in case the the apiKey is updated
     $store = json_decode(file_get_contents($pluginPath . "/store.json"));
-    saveData('Start while loop', '', true);
+    saveData('Start while loop', date('Y-m-d H:i:s'), true);
 
     $fppStatus = getFppStatus();
     $currentStatus = $fppStatus->status;
