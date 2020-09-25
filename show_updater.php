@@ -68,6 +68,6 @@ while(true) {
     saveData('Response from tallgrasslights', json_encode($response), false);
 
     # change sleep timer to roughly time remaining on the song to reduce requests
-    $sleepTime = $fppStatus->seconds_remaining > 0 ? $fppStatus->seconds_remaining : 20;
+    $sleepTime = $fppStatus->seconds_remaining > 0 ? $fppStatus->seconds_remaining + 2 : 20;
     sleep($sleepTime);
 }
