@@ -21,8 +21,8 @@ while(true) {
     $store = json_decode(file_get_contents($pluginPath . "/store.json"));
 
     $fppStatus = getFppStatus();
+    file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/test4.txt", $fppStatus);
     $currentlyPlaying = $fppStatus->current_sequence;
-    file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/test4.txt", $currentlyPlaying);
     $fppd = $fppStatus->fppd;
     $scheduler = $fppStatus->scheduler;
     $currentlyPlayingStatus = $fppStatus->scheduler->status;

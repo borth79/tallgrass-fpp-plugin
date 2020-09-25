@@ -80,7 +80,6 @@ function postSchedule($apiKey=null, $fullPlaylist=null)
 {
     $schedules = getSchedules();
     $activeSchedules = [];
-    // get the first matching schedule
     foreach ($schedules as $schedule) {
         if ($schedule['enabled'] !== 1) {
             continue;
