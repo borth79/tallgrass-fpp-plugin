@@ -37,6 +37,12 @@ $sequences = getAllSequences();
     </div>
     <?php } ?>
 
+    <?php if ($_REQUEST['submission']) { ?>
+        <div class="alert alert-success">
+            <p>Updates have been submitted.</p>
+        </div>
+    <?php } ?>
+
     <div class="alert alert-secondary">
         <h2>TallGrass Lights Plugin</h2>
     </div>
