@@ -93,7 +93,7 @@ function postPlaylist($apiKey = null, $playlist = null, $type = 'full')
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($postData));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $response = json_decode(curl_exec($ch));
-        $errors = (isset($response->data)) ? $response->data : false;
+        $errors = (isset($response->errors)) ? $response->errors : false;
         $responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 //        file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/testResponse.txt", json_encode($response));
