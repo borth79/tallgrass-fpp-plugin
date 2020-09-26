@@ -5,6 +5,26 @@ $pluginPath = "/home/fpp/media/plugins/tallgrass-fpp-plugin";
 $scriptPath = $pluginPath . "/scripts";
 
 
+function saveData($step, $data, $reset = false, $file) {
+    $fileData = '';
+    if ($reset === false) {
+        $fileData = file_get_contents($file);
+    }
+    $fileData .= "\n\nStep: " . $step ."\n";
+    $fileData .= $data;
+    file_put_contents($file, $fileData);
+}
+
+function getFppStatus() {
+    $url = "http://127.0.0.1/api/fppd/status";
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    saveData('Response from /api/fppd/status/', json_encode($response), false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xShowUpdater.txt");
+    return json_decode($response);
+}
 
 function getSchedules() {
     $url = "http://127.0.0.1/api/schedule";
@@ -64,7 +84,6 @@ function getSequenceData($sequence=null)
     if ($sequence === null) {
         return json_decode([]);
     }
-    file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/test3.txt", $sequence);
     $url = "http://127.0.0.1/api/sequence/" . str_ireplace(' ', '%20', $sequence) . "/meta";
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
@@ -75,6 +94,20 @@ function getSequenceData($sequence=null)
     return json_decode($response);
 }
 
+function getMusicMeta($fileName=null)
+{
+    if ($fileName === null) {
+        return json_decode([]);
+    }
+    $url = "http://127.0.0.1/api/media/" . str_ireplace(' ', '%20', $fileName) . "/meta";
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    saveData('/api/media/<file>/meta response', $response, false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/" . "/xShowUpdater.txt");
+    return json_decode($response);
+}
 
 function postSchedule($apiKey=null, $fullPlaylist=null)
 {

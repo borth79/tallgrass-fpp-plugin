@@ -2,37 +2,15 @@
 require_once "globals.php";
 
 
-function getFppStatus() {
-    $url = "http://127.0.0.1/api/fppd/status";
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    $response = curl_exec($ch);
-    curl_close($ch);
-    saveData('Response from /api/fppd/status/', json_encode($response), false);
-    return json_decode($response);
-}
-
-function saveData($step, $data, $reset = false) {
-    $file = "/home/fpp/media/plugins/tallgrass-fpp-plugin/xShowUpdater.txt";
-    $fileData = '';
-    if ($reset === false) {
-        $fileData = file_get_contents($file);
-    }
-    $fileData .= "\n\nStep: " . $step ."\n";
-    $fileData .= $data;
-    file_put_contents($file, $fileData);
-}
-
 while(true) {
     // get store again in case the the apiKey is updated
     $store = json_decode(file_get_contents($pluginPath . "/store.json"));
-    saveData('Start while loop', date('Y-m-d H:i:s'), true);
+    saveData('Start while loop', date('Y-m-d H:i:s'), true, $pluginPath . "/xShowUpdater.txt");
 
     $fppStatus = getFppStatus();
     $currentStatus = $fppStatus->status;
     if ($currentStatus !== 1) {
-        saveData('Check show status', $currentStatus, false);
+        saveData('Check show status', $currentStatus, false, $pluginPath . "/xShowUpdater.txt");
         continue;
     }
     $currentlyPlaying = $fppStatus->current_sequence;
@@ -42,7 +20,9 @@ while(true) {
 
 
     $sequecneData = getSequenceData($currentlyPlaying);
-    $musicMeta = getMusicMeta($currentlyPlaying);
+    if (!empty($fppStatus->current_song)) {
+        $musicMeta = getMusicMeta($fppStatus->current_song);
+    }
 
     $postData = [
         'apiKey' => $store->apiKey,
@@ -50,7 +30,7 @@ while(true) {
         'start_time' => date('Y-m-d H:i:s', time() - $fppStatus->seconds_elapsed),
         'end_time' => date('Y-m-d H:i:s', time() + $fppStatus->seconds_remaining),
     ];
-    saveData('Post data to tallgrasslights', json_encode($postData), false);
+    saveData('Post data to tallgrasslights', json_encode($postData), false, $pluginPath . "/xShowUpdater.txt");
 
     $url = "http://api.tallgrasslights.com/api/xlights/currently-playing";
     $headers = [
@@ -66,7 +46,7 @@ while(true) {
     $responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
 
-    saveData('Response from tallgrasslights', json_encode($response), false);
+    saveData('Response from tallgrasslights', json_encode($response), false, $pluginPath . "/xShowUpdater.txt");
 
     # change sleep timer to roughly time remaining on the song to reduce requests
     $sleepTime = $fppStatus->seconds_remaining > 0 ? $fppStatus->seconds_remaining + 2 : 20;
