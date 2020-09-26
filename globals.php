@@ -94,6 +94,14 @@ function getSequenceData($sequence=null)
     return json_decode($response);
 }
 
+function secondsToTime($seconds)
+{
+    $hours = floor($seconds / 3600);
+    $mins = floor($seconds / 60 % 60);
+    $secs = floor($seconds % 60);
+    return $hours.':'.$mins.':'.$secs;
+}
+
 function getMusicMeta($fileName=null)
 {
     if ($fileName === null) {
@@ -162,7 +170,7 @@ function postPlaylist($apiKey = null, $playlist = null, $type = 'full')
             }
             $sequenceData[] = array_merge(
                 (array) getSequenceData($sequence['sequenceName']),
-                [ 'length' => $sequence['duration'] ]
+                [ 'length' => secondsToTime(round($sequence['duration'])) ]
             );
         }
 
@@ -172,11 +180,11 @@ function postPlaylist($apiKey = null, $playlist = null, $type = 'full')
         ];
         switch ($type) {
             case 'auto':
-                saveData('Auto Playlist Post Data', json_encode($postData), false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xpostAutoPlayData.txt");
+                saveData('Auto Playlist Post Data', json_encode($postData), false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xPostAutoPlaylistData.txt");
                 $url = "http://api.tallgrasslights.com/api/xlights/autoplay-list";
                 break;
             case 'full':
-                saveData('Full Playlist Post Data', json_encode($postData), false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xpostFullPlayData.txt");
+                saveData('Full Playlist Post Data', json_encode($postData), false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xPostFullPlaylistData.txt");
                 $url = "http://api.tallgrasslights.com/api/xlights/song-list";
                 break;
         }
