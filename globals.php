@@ -222,29 +222,31 @@ function postPlaylist($apiKey = null, $playlist = null, $type = 'full')
         echo '</div>';
     }
 
-    function updateSongQueue($apiKey) {
-        // get next song from tallgrasslights
-        $url = "http://api.tallgrasslights.com/api/xlights/next-song";
+}
 
-        $headers = [
-            'Content-Type: application/json',
-        ];
 
-        $postData = [
-            'apiKey' => $apiKey,
-        ];
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($postData));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $response = json_decode(curl_exec($ch));
-        $responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
-        saveData('http://api.tallgrasslights.com/api/xlights/next-song', json_encode($response), true, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xNextSongResponse.txt");
 
-    }
+function updateSongQueue($apiKey) {
+    // get next song from tallgrasslights
+    $url = "http://api.tallgrasslights.com/api/xlights/next-song";
+
+    $headers = [
+        'Content-Type: application/json',
+    ];
+
+    $postData = [
+        'apiKey' => $apiKey,
+    ];
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($postData));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    $response = json_decode(curl_exec($ch));
+    $responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+    saveData('http://api.tallgrasslights.com/api/xlights/next-song', json_encode($response), true, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xNextSongResponse.txt");
 
 }
 
