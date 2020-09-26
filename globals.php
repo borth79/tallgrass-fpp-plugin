@@ -105,7 +105,7 @@ function getMusicMeta($fileName=null)
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     $response = curl_exec($ch);
     curl_close($ch);
-    saveData('Media filename', $fileName, false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/" . "/xShowUpdater.txt");
+    saveData('Request Url', $url, false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/" . "/xShowUpdater.txt");
     saveData('/api/media/<file>/meta response', $response, false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/" . "/xShowUpdater.txt");
     return json_decode($response);
 }
