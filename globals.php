@@ -171,7 +171,7 @@ function postPlaylist($apiKey = null, $playlist = null, $type = 'full')
             saveData('$playlist', json_encode($playlist), false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xTest.txt");
             $sequenceData[] = array_merge(
                 (array) getSequenceData($sequence['sequenceName']),
-                (array) getMusicMeta($playlist['current_song']),
+                (array) getMusicMeta($playlist['mediaName']),
                 [ 'length' => secondsToTime(round($sequence['duration'])) ]
             );
         }
