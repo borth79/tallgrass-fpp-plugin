@@ -168,7 +168,8 @@ function postPlaylist($apiKey = null, $playlist = null, $type = 'full')
             if (!$sequence['enabled']) {
                 continue;
             }
-            saveData('$playlist', json_encode($playlist), false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xTest.txt");
+            saveData('$playlist', json_encode($playlist), true, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xTest.txt");
+            saveData('Media Meta Response', json_encode(getMusicMeta($playlist['mediaName'])), false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xTest.txt");
             $sequenceData[] = array_merge(
                 (array) getSequenceData($sequence['sequenceName']),
                 (array) getMusicMeta($playlist['mediaName']),
