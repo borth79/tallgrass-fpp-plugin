@@ -248,5 +248,35 @@ function updateSongQueue($apiKey) {
     curl_close($ch);
     saveData('http://api.tallgrasslights.com/api/xlights/next-song', json_encode($response), true, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xNextSongResponse.txt");
 
+    # get sequence info
+    $sequecneData = getSequenceData($response->file);
+    saveData('getSequenceData('.$response->file.')', json_encode($sequecneData), false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xNextSongResponse.txt");
+
+    # build json playlist file
+//    $playlistFile = [
+//        'name' => 'Song_Requests',
+//        'version' => 3,
+//        'repeat' => 0,
+//        'loopCount' => 0,
+//        'desc' => '',
+//        'mainPlaylist' =>
+//            [
+//                0 =>
+//                    [
+//                        'type' => 'both',
+//                        'enabled' => 1,
+//                        'playOnce' => 0,
+//                        'sequenceName' => 'The-Walking-Dead.fseq',
+//                        'mediaName' => 'The-Walking-Dead-2018.mp4',
+//                        'videoOut' => '--Default--',
+//                        'duration' => 48.15,
+//                    ],
+//            ],
+//        'playlistInfo' => [
+//                'total_duration' => '00m:48s',
+//                'total_items' => 1,
+//            ],
+//    ];
+
 }
 
