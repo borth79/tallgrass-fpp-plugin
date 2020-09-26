@@ -51,4 +51,8 @@ while(true) {
     # change sleep timer to roughly time remaining on the song to reduce requests
     $sleepTime = $fppStatus->seconds_remaining > 0 ? $fppStatus->seconds_remaining + 2 : 20;
     sleep($sleepTime);
+
+
+    // get next song
+    updateSongQueue();
 }
