@@ -84,6 +84,7 @@ function getSequenceData($sequence=null)
     if ($sequence === null) {
         return json_decode([]);
     }
+    $sequence = str_ireplace('.fseq', '', $sequence);
     $url = "http://127.0.0.1/api/sequence/" . str_ireplace(' ', '%20', $sequence) . "/meta";
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
@@ -247,7 +248,6 @@ function updateSongQueue($apiKey) {
     $responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
     saveData('http://api.tallgrasslights.com/api/xlights/next-song', json_encode($response), true, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xNextSongResponse.txt");
-    saveData('TEST', $response->file, false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xNextSongResponse.txt");
 
     # get sequence info
     $sequecneData = getSequenceData($response->file);
