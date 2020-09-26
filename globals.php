@@ -171,9 +171,13 @@ function postPlaylist($apiKey = null, $playlist = null, $type = 'full')
             'list' => $sequenceData,
         ];
         switch ($type) {
-            case 'auto': $url = "http://api.tallgrasslights.com/api/xlights/autoplay-list";
+            case 'auto':
+                saveData('Auto Playlist Post Data', json_encode($postData), false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xpostAutoPlayData.txt");
+                $url = "http://api.tallgrasslights.com/api/xlights/autoplay-list";
                 break;
-            case 'full': $url = "http://api.tallgrasslights.com/api/xlights/song-list";
+            case 'full':
+                saveData('Full Playlist Post Data', json_encode($postData), false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xpostFullPlayData.txt");
+                $url = "http://api.tallgrasslights.com/api/xlights/song-list";
                 break;
         }
         $headers = [
