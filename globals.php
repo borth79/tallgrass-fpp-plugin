@@ -108,6 +108,10 @@ function getMusicMeta($fileName=null)
     if ($fileName === null) {
         return json_decode([]);
     }
+    $fileName = str_ireplace('.mp3', '', $fileName);
+    $fileName = str_ireplace('.mp4', '', $fileName);
+    $fileName = str_ireplace('.wav', '', $fileName);
+    $fileName = str_ireplace('.wmv', '', $fileName);
     $url = "http://127.0.0.1/api/media/" . str_ireplace(' ', '%20', $fileName) . "/meta";
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
