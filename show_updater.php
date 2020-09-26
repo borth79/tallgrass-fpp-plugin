@@ -9,7 +9,7 @@ function getFppStatus() {
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     $response = curl_exec($ch);
     curl_close($ch);
-
+    saveData('Response from /api/fppd/status/', json_encode($response), false);
     return json_decode($response);
 }
 
@@ -42,6 +42,7 @@ while(true) {
 
 
     $sequecneData = getSequenceData($currentlyPlaying);
+    $musicMeta = getMusicMeta($currentlyPlaying);
 
     $postData = [
         'apiKey' => $store->apiKey,
