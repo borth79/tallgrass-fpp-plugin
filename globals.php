@@ -108,10 +108,6 @@ function getMusicMeta($fileName=null)
     if ($fileName === null) {
         return json_decode([]);
     }
-    $fileName = str_ireplace('.mp3', '', $fileName);
-    $fileName = str_ireplace('.mp4', '', $fileName);
-    $fileName = str_ireplace('.wav', '', $fileName);
-    $fileName = str_ireplace('.wmv', '', $fileName);
     $url = "http://127.0.0.1/api/media/" . str_ireplace(' ', '%20', $fileName) . "/meta";
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
@@ -121,6 +117,20 @@ function getMusicMeta($fileName=null)
     saveData('Request Url', $url, false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/" . "/xShowUpdater.txt");
     saveData('/api/media/<file>/meta response', $response, false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/" . "/xShowUpdater.txt");
     return json_decode($response);
+}
+
+function getMusicDuration($fileName=null)
+{
+    if ($fileName === null) {
+        return json_decode([]);
+    }
+    $url = "http://127.0.0.1/api/media/" . str_ireplace(' ', '%20', $fileName) . "/duration";
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    return json_decode($response)->{$fileName}->duration;
 }
 
 function postSchedule($apiKey=null, $fullPlaylist=null)
@@ -261,8 +271,10 @@ function updateSongQueue($apiKey) {
     saveData('Media File: ', $mediaFile, false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xNextSongResponse.txt");
 
     # TODO: This will fail if it has no media
-    $mediaMeta = getMusicMeta($mediaFile);
-    saveData('Media Meta: ', json_encode($mediaMeta), false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xNextSongResponse.txt");
+    $mediaDuration = getMusicDuration($mediaFile);
+    $mediaDurationX = explode(':', secondsToTime(round($mediaDuration)));
+    $mediaDurationString = $mediaDurationX[1].'m:'.$mediaDurationX[2].'s';
+    saveData('Media Duration: ', json_encode($mediaDuration), false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xNextSongResponse.txt");
 
     # build json playlist file
     $playlistFile = [
@@ -281,14 +293,14 @@ function updateSongQueue($apiKey) {
                         'sequenceName' => $response->file,
                         'mediaName' => $mediaFile,
                         'videoOut' => '--Default--',
-                        'duration' => 48.15,
+                        'duration' => getMusicDuration($mediaFile),
                     ],
             ],
         'playlistInfo' => [
-                'total_duration' => '00m:48s',
+                'total_duration' => $mediaDurationString,
                 'total_items' => 1,
             ],
     ];
-
+    saveData('$playlistFile', json_encode($playlistFile), false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xNextSongResponse.txt");
 }
 
