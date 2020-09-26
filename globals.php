@@ -252,36 +252,39 @@ function updateSongQueue($apiKey) {
     # get sequence info
     $sequecneData = getSequenceData($response->file);
     saveData('getSequenceData('.$response->file.')', json_encode($sequecneData), false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xNextSongResponse.txt");
-    saveData('Full path to media file', $sequecneData->variableHeaders->mf, false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xNextSongResponse.txt");
     $mediaPath = explode("/", $sequecneData->variableHeaders->mf);
     $mediaFile = end($mediaPath);
     saveData('Media File: ', $mediaFile, false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xNextSongResponse.txt");
 
+    # TODO: This will fail if it has no media
+    $mediaMeta = getMusicMeta($mediaFile);
+    saveData('Media Meta: ', json_encode($mediaMeta), false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xNextSongResponse.txt");
+
     # build json playlist file
-//    $playlistFile = [
-//        'name' => 'Song_Requests',
-//        'version' => 3,
-//        'repeat' => 0,
-//        'loopCount' => 0,
-//        'desc' => '',
-//        'mainPlaylist' =>
-//            [
-//                0 =>
-//                    [
-//                        'type' => 'both',
-//                        'enabled' => 1,
-//                        'playOnce' => 0,
-//                        'sequenceName' => 'The-Walking-Dead.fseq',
-//                        'mediaName' => 'The-Walking-Dead-2018.mp4',
-//                        'videoOut' => '--Default--',
-//                        'duration' => 48.15,
-//                    ],
-//            ],
-//        'playlistInfo' => [
-//                'total_duration' => '00m:48s',
-//                'total_items' => 1,
-//            ],
-//    ];
+    $playlistFile = [
+        'name' => 'Song_Requests',
+        'version' => 3,
+        'repeat' => 0,
+        'loopCount' => 0,
+        'desc' => '',
+        'mainPlaylist' =>
+            [
+                0 =>
+                    [
+                        'type' => 'both',
+                        'enabled' => 1,
+                        'playOnce' => 0,
+                        'sequenceName' => $response->file,
+                        'mediaName' => $mediaFile,
+                        'videoOut' => '--Default--',
+                        'duration' => 48.15,
+                    ],
+            ],
+        'playlistInfo' => [
+                'total_duration' => '00m:48s',
+                'total_items' => 1,
+            ],
+    ];
 
 }
 
