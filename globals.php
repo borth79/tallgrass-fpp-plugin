@@ -170,6 +170,7 @@ function postPlaylist($apiKey = null, $playlist = null, $type = 'full')
             }
             $sequenceData[] = array_merge(
                 (array) getSequenceData($sequence['sequenceName']),
+                (array) getMusicMeta($sequence['current_song']),
                 [ 'length' => secondsToTime(round($sequence['duration'])) ]
             );
         }
