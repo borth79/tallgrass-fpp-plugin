@@ -253,8 +253,8 @@ function updateSongQueue($apiKey) {
     $sequecneData = getSequenceData($response->file);
     saveData('getSequenceData('.$response->file.')', json_encode($sequecneData), false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xNextSongResponse.txt");
     saveData('Full path to media file', $sequecneData->variableHeaders->mf, false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xNextSongResponse.txt");
-    $mediaFile = explode("/", $sequecneData->variableHeaders->mf);
-    end($mediaFile);
+    $mediaPath = explode("/", $sequecneData->variableHeaders->mf);
+    $mediaFile = end($mediaPath);
     saveData('Media File: ', $mediaFile, false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xNextSongResponse.txt");
 
     # build json playlist file
