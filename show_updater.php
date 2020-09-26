@@ -54,5 +54,5 @@ while(true) {
 
 
     // get next song
-    updateSongQueue();
+    updateSongQueue($store->apiKey);
 }
