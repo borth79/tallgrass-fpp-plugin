@@ -5,12 +5,14 @@ $pluginPath = "/home/fpp/media/plugins/tallgrass-fpp-plugin";
 $scriptPath = $pluginPath . "/scripts";
 
 
-function saveData($step, $data, $reset = false, $file) {
+function saveData($step=null, $data, $reset = false, $file) {
     $fileData = '';
     if ($reset === false) {
         $fileData = file_get_contents($file);
     }
-    $fileData .= "\n\nStep: " . $step ."\n";
+    if ($step) {
+        $fileData .= "\n\nStep: " . $step ."\n";
+    }
     $fileData .= $data;
     file_put_contents($file, $fileData);
 }
@@ -278,7 +280,7 @@ function updateSongQueue($apiKey) {
 
     # build json playlist file
     $playlistFile = [
-        'name' => 'Song_Requests',
+        'name' => 'Song_Queue',
         'version' => 3,
         'repeat' => 0,
         'loopCount' => 0,
@@ -302,5 +304,8 @@ function updateSongQueue($apiKey) {
             ],
     ];
     saveData('$playlistFile', json_encode($playlistFile), false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xNextSongResponse.txt");
+
+    # write to the playlist file
+    saveData(null, json_encode($playlistFile), true, "/home/fpp/media/playlists/Song_Queue.json");
 }
 
