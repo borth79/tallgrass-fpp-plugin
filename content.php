@@ -47,7 +47,7 @@ $sequences = getAllSequences();
         <h2>TallGrass Lights Plugin</h2>
     </div>
 
-    <form method="post" action="http://172.28.0.2/plugin.php?plugin=tallgrass-fpp-plugin&page=content.php">
+    <form method="post" action="/plugin.php?plugin=tallgrass-fpp-plugin&page=content.php">
         <input type="hidden" name="submission" value="1">
         <div class="form-group">
             <label for="apiKey">API Key</label>
