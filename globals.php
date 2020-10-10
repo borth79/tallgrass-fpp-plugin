@@ -87,12 +87,15 @@ function getSequenceData($sequence=null)
         return json_decode([]);
     }
     $sequence = str_ireplace('.fseq', '', $sequence);
-    $url = "http://127.0.0.1/api/sequence/" . str_ireplace(' ', '%20', $sequence) . "/meta";
+    $sequence = str_ireplace(' ', '%20', $sequence);
+    saveData('Sequence to Fetch', $sequence, false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xShowUpdater.txt");
+    $url = "http://127.0.0.1/api/sequence/" . $sequence . "/meta";
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     $response = curl_exec($ch);
     curl_close($ch);
+    saveData('Response from ' . $url, $response, false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xShowUpdater.txt");
     file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/responseSequenceDataResponse.txt", $response);
     return json_decode($response);
 }
