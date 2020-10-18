@@ -28,6 +28,46 @@ $sequences = getAllSequences();
 ?>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+<script>
+    function projectorOff() {
+        $.ajax({
+            type: "POST",
+            url: '/plugin.php?plugin=tallgrass-fpp-plugin&page=pjlink.php',
+            data: 'command=OFF',
+            success: function () {
+
+            },
+            dataType: dataType
+        });
+    }
+
+    function projectorOn() {
+        $.ajax({
+            type: "POST",
+            url: '/plugin.php?plugin=tallgrass-fpp-plugin&page=pjlink.php',
+            data: 'command=ON',
+            success: function () {
+
+            },
+            dataType: dataType
+        });
+    }
+
+    function projectorStatus() {
+        $.ajax({
+            type: "POST",
+            url: '/plugin.php?plugin=tallgrass-fpp-plugin&page=pjlink.php',
+            data: 'command=STATUS',
+            success: function () {
+
+            },
+            dataType: dataType
+        });
+    }
+</script>
+
 
 <div class="container">
     <?php if (isset($errors) && count($errors)) { ?>
@@ -86,14 +126,13 @@ $sequences = getAllSequences();
 
     <div class="row">
         <div class="col-4">
-            <a class="btn btn-success" target="_blank" href="/plugin.php?plugin=tallgrass-fpp-plugin&page=pjlink.php?command=ON">Turn On</a>
+            <div class="btn btn-success" onclick="projectorOn()">Turn On</div>
         </div>
         <div class="col-4">
-            <a class="btn btn-danger" target="_blank" href="/plugin.php?plugin=tallgrass-fpp-plugin&page=pjlink.php?command=OFF">Turn Off</a>
+            <div class="btn btn-danger" onclick="projectorOff()">Turn Off</div>
         </div>
         <div class="col-4">
-            <a class="btn btn-info" target="_blank" href="/plugin.php?plugin=tallgrass-fpp-plugin&page=pjlink.php?command=STATUS">Turn On</a>
+            <div class="btn btn-info" onclick="projectorOff()">Status</div>
         </div>
-    </div>
-
+        </div>
 </div>
