@@ -39,7 +39,7 @@ $sequences = getAllSequences();
             success: function () {
 
             },
-            dataType: dataType
+            dataType: 'html'
         });
     }
 
@@ -51,7 +51,7 @@ $sequences = getAllSequences();
             success: function () {
 
             },
-            dataType: dataType
+            dataType: 'html'
         });
     }
 
@@ -63,7 +63,7 @@ $sequences = getAllSequences();
             success: function () {
 
             },
-            dataType: dataType
+            dataType: 'html'
         });
     }
 </script>
