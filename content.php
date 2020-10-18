@@ -30,55 +30,6 @@ $sequences = getAllSequences();
 ?>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-<script>
-    function projectorOff() {
-        $("#projectorStatus").innerHTML('');
-        $.ajax({
-            type: "POST",
-            url: '/plugin.php?plugin=tallgrass-fpp-plugin&page=pjlink.php',
-            data: 'command=OFF',
-            success: function () {
-                $("#projectorStatus").innerHTML('Power Off');
-            },
-            error: function () {
-                $("#projectorStatus").innerHTML('Error');
-            },
-            dataType: 'html'
-        });
-    }
-
-    function projectorOn() {
-        $("#projectorStatus").innerHTML('');
-        $.ajax({
-            type: "POST",
-            url: '/plugin.php?plugin=tallgrass-fpp-plugin&page=pjlink.php',
-            data: 'command=ON',
-            success: function () {
-                $("#projectorStatus").innerHTML('Power On');
-            },
-            error: function () {
-                $("#projectorStatus").innerHTML('Error');
-            },
-            dataType: 'html'
-        });
-    }
-
-    function projectorStatus() {
-        $("#projectorStatus").innerHTML('');
-        $.ajax({
-            type: "POST",
-            url: '/plugin.php?plugin=tallgrass-fpp-plugin&page=pjlink.php',
-            data: 'command=STATUS',
-            success: function (res) {
-                $("#projectorStatus").innerHTML(res);
-            },
-            error: function () {
-                $("#projectorStatus").innerHTML('Error');
-            },
-            dataType: 'html'
-        });
-    }
-</script>
 
 
 <div class="container">
@@ -159,18 +110,5 @@ $sequences = getAllSequences();
         <hr />
         <div id="projectorStatus"><?=$projectorStatusMessage?></div>
     </form>
-
-    <div class="row">
-        <div class="col-4">
-            <div class="btn btn-success" onclick="projectorOn()">Turn On</div>
-        </div>
-        <div class="col-4">
-            <div class="btn btn-danger" onclick="projectorOff()">Turn Off</div>
-        </div>
-        <div class="col-4">
-            <div class="btn btn-info" onclick="projectorOff()">Status</div>
-        </div>
-    </div>
-    <div id="projectorStatus"></div>
 
 </div>
