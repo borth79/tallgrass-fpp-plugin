@@ -1,6 +1,7 @@
 <?php
 require_once "globals.php";
 
+$projectorStatusMessage = '';
 // get the current data store
 require_once "process.php";
 require_once "pjlink.php";
@@ -29,7 +30,56 @@ $sequences = getAllSequences();
 ?>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script>
+    function projectorOff() {
+        $("#projectorStatus").innerHTML('');
+        $.ajax({
+            type: "POST",
+            url: '/plugin.php?plugin=tallgrass-fpp-plugin&page=pjlink.php',
+            data: 'command=OFF',
+            success: function () {
+                $("#projectorStatus").innerHTML('Power Off');
+            },
+            error: function () {
+                $("#projectorStatus").innerHTML('Error');
+            },
+            dataType: 'html'
+        });
+    }
+
+    function projectorOn() {
+        $("#projectorStatus").innerHTML('');
+        $.ajax({
+            type: "POST",
+            url: '/plugin.php?plugin=tallgrass-fpp-plugin&page=pjlink.php',
+            data: 'command=ON',
+            success: function () {
+                $("#projectorStatus").innerHTML('Power On');
+            },
+            error: function () {
+                $("#projectorStatus").innerHTML('Error');
+            },
+            dataType: 'html'
+        });
+    }
+
+    function projectorStatus() {
+        $("#projectorStatus").innerHTML('');
+        $.ajax({
+            type: "POST",
+            url: '/plugin.php?plugin=tallgrass-fpp-plugin&page=pjlink.php',
+            data: 'command=STATUS',
+            success: function (res) {
+                $("#projectorStatus").innerHTML(res);
+            },
+            error: function () {
+                $("#projectorStatus").innerHTML('Error');
+            },
+            dataType: 'html'
+        });
+    }
+</script>
+
 
 <div class="container">
     <?php if (isset($errors) && count($errors)) { ?>
@@ -106,7 +156,21 @@ $sequences = getAllSequences();
         <div class="col-12">
             <button class="btn btn-lg btn-info">Run Command</button>
         </div>
+        <hr />
         <div id="projectorStatus"><?=$projectorStatusMessage?></div>
     </form>
+
+    <div class="row">
+        <div class="col-4">
+            <div class="btn btn-success" onclick="projectorOn()">Turn On</div>
+        </div>
+        <div class="col-4">
+            <div class="btn btn-danger" onclick="projectorOff()">Turn Off</div>
+        </div>
+        <div class="col-4">
+            <div class="btn btn-info" onclick="projectorOff()">Status</div>
+        </div>
+    </div>
+    <div id="projectorStatus"></div>
 
 </div>

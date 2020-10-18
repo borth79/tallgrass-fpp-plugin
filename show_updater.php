@@ -1,6 +1,7 @@
 <?php
 require_once "globals.php";
-
+require_once "pjlink/pjlink.class.php";
+include('pjlink.config.php');
 
 while(true) {
     // get store again in case the the apiKey is updated
@@ -11,8 +12,27 @@ while(true) {
     $currentStatus = $fppStatus->status;
     if ($currentStatus !== 1) {
         saveData('Check show status', $currentStatus, false, $pluginPath . "/xShowUpdater.txt");
+        // show is off check projector status
+        $projectorStatus = $pjlink->getPowerState($projectIP, '', '60', $port);
+        saveData('Check Projector Status', $projectorStatus, false, $pluginPath . "/xShowUpdater.txt");
+        if ($projectorStatus !== 2) {
+            saveData('Turning off power',
+                $pjlink->powerOff($projectIP, '', '60', $port),
+                false,
+                $pluginPath . "/xShowUpdater.txt"
+            );
+        }
         continue;
     }
+    // turn on projector if not on and show is running
+    if ($projectorStatus !== 1) {
+        saveData('Turning on power',
+            $pjlink->powerOn($projectIP, '', '60', $port),
+            false,
+            $pluginPath . "/xShowUpdater.txt"
+        );
+    }
+
     $currentlyPlaying = $fppStatus->current_sequence;
     $fppd = $fppStatus->fppd;
     $scheduler = $fppStatus->scheduler;
