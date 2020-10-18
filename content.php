@@ -90,15 +90,15 @@ $sequences = getAllSequences();
         <div class="row">
             <div class="col-4">
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="OFF">
+                    <input class="form-check-input" type="checkbox" name="command" value="OFF">
                     <label class="form-check-label" for="inlineCheckbox1">Off</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="ON">
+                    <input class="form-check-input" type="checkbox" name="command" value="ON">
                     <label class="form-check-label" for="inlineCheckbox2">On</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="STATUS">
+                    <input class="form-check-input" type="checkbox" name="command" value="STATUS">
                     <label class="form-check-label" for="inlineCheckbox3">Status</label>
                 </div>
             </div>
