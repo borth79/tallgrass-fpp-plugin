@@ -86,13 +86,13 @@ $sequences = getAllSequences();
 
     <div class="row">
         <div class="col-4">
-            <a class="btn btn-success" target="_blank" href="/pjlink.php?command=ON">Turn On</a>
+            <a class="btn btn-success" target="_blank" href="/plugin.php?plugin=tallgrass-fpp-plugin&page=pjlink.php?command=ON">Turn On</a>
         </div>
         <div class="col-4">
-            <a class="btn btn-danger" target="_blank" href="/pjlink.php?command=OFF">Turn Off</a>
+            <a class="btn btn-danger" target="_blank" href="/plugin.php?plugin=tallgrass-fpp-plugin&page=pjlink.php?command=OFF">Turn Off</a>
         </div>
         <div class="col-4">
-            <a class="btn btn-info" target="_blank" href="/pjlink.php?command=STATUS">Turn On</a>
+            <a class="btn btn-info" target="_blank" href="/plugin.php?plugin=tallgrass-fpp-plugin&page=pjlink.php?command=STATUS">Turn On</a>
         </div>
     </div>
 
