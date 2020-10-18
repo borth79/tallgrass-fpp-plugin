@@ -2,10 +2,11 @@
 
 include('pjlink/pjlink.class.php');
 
-$request = $_GET['command'];
+$request = $_POST['command'];
 $pjlink = new PJLink();
 $projectIP = '192.168.86.88';
 $port = 4352;
+$projectorStatusMessage = '';
 
 switch($request) {
     case 'OFF':
@@ -15,13 +16,13 @@ switch($request) {
         $pjlink->powerOn($projectIP, '', '60', $port);
         break;
     case 'ON':
-        $pjlink->powerOn($projectIP, '', '60', $port);
+        $projectorStatusMessage = $pjlink->powerOn($projectIP, '', '60', $port);
         break;
     case 'STATUS':
-        $pjlink->getPowerState($projectIP, '', '60', $port);
+        $projectorStatusMessage = $pjlink->getPowerState($projectIP, '', '60', $port);
         break;
 }
 
-echo "Errors: \n";
-print_r($pjlink->error);
-echo "\n";
+if ($pjlink->error) {
+    $projectorStatusMessage = $pjlink->error;
+}
