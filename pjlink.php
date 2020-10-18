@@ -20,10 +20,10 @@ switch($request) {
         break;
     case 'STATUS':
         $projectorStatusMessage = $pjlink->getPowerState($projectIP, '', '60', $port);
-        if ($projectorStatusMessage === 1) {
+        if ($projectorStatusMessage == 1) {
             $projectorStatusMessage = 'ON';
         }
-        if ($projectorStatusMessage === 1) {
+        if ($projectorStatusMessage == 1) {
             $projectorStatusMessage = 'OFF';
         }
         break;
