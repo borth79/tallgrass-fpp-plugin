@@ -14,6 +14,7 @@ while(true) {
         saveData('Check show status', $currentStatus, false, $pluginPath . "/xShowUpdater.txt");
         // show is off check projector status
         $projectorStatus = $pjlink->getPowerState($projectIP, '', '60', $port);
+        saveData('Show is disabled', '', true, $pluginPath . "/xShowUpdater.txt");
         saveData('Check Projector Status', $projectorStatus, false, $pluginPath . "/xShowUpdater.txt");
         if ($projectorStatus !== 2) {
             saveData('Turning off power',
@@ -22,6 +23,9 @@ while(true) {
                 $pluginPath . "/xShowUpdater.txt"
             );
         }
+        saveData('Check Projector Status', $projectorStatus, false, $pluginPath . "/xShowUpdater.txt");
+        saveData('Sleeping for 20 seconds', 'Have a nice nap', false, $pluginPath . "/xShowUpdater.txt");
+        sleep(20);
         continue;
     }
     // turn on projector if not on and show is running
