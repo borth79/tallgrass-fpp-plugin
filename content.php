@@ -32,36 +32,48 @@ $sequences = getAllSequences();
 
 <script>
     function projectorOff() {
+        $("#projectorStatus").innerHTML('');
         $.ajax({
             type: "POST",
             url: '/plugin.php?plugin=tallgrass-fpp-plugin&page=pjlink.php',
             data: 'command=OFF',
             success: function () {
-
+                $("#projectorStatus").innerHTML('Power Off');
+            },
+            error: function () {
+                $("#projectorStatus").innerHTML('Error');
             },
             dataType: 'html'
         });
     }
 
     function projectorOn() {
+        $("#projectorStatus").innerHTML('');
         $.ajax({
             type: "POST",
             url: '/plugin.php?plugin=tallgrass-fpp-plugin&page=pjlink.php',
             data: 'command=ON',
             success: function () {
-
+                $("#projectorStatus").innerHTML('Power On');
+            },
+            error: function () {
+                $("#projectorStatus").innerHTML('Error');
             },
             dataType: 'html'
         });
     }
 
     function projectorStatus() {
+        $("#projectorStatus").innerHTML('');
         $.ajax({
             type: "POST",
             url: '/plugin.php?plugin=tallgrass-fpp-plugin&page=pjlink.php',
             data: 'command=STATUS',
-            success: function () {
-
+            success: function (res) {
+                $("#projectorStatus").innerHTML(res);
+            },
+            error: function () {
+                $("#projectorStatus").innerHTML('Error');
             },
             dataType: 'html'
         });
@@ -134,5 +146,6 @@ $sequences = getAllSequences();
         <div class="col-4">
             <div class="btn btn-info" onclick="projectorOff()">Status</div>
         </div>
-        </div>
+    </div>
+    <div id="projectorStatus"></div>
 </div>
