@@ -8,6 +8,7 @@ $projectIP = '192.168.86.88';
 $port = 4352;
 $projectorStatusMessage = '';
 
+$projectorStatusMessage = $pjlink->getPowerState($projectIP, '', '60', $port);
 switch($request) {
     case 'OFF':
         $pjlink->powerOff($projectIP, '', '60', $port);
@@ -15,18 +16,13 @@ switch($request) {
     case 'ON':
         $pjlink->powerOn($projectIP, '', '60', $port);
         break;
-    case 'ON':
-        $projectorStatusMessage = $pjlink->powerOn($projectIP, '', '60', $port);
-        break;
-    case 'STATUS':
-        $projectorStatusMessage = $pjlink->getPowerState($projectIP, '', '60', $port);
-        if ($projectorStatusMessage === '1') {
-            $projectorStatusMessage = 'ON';
-        }
-        if ($projectorStatusMessage === '2') {
-            $projectorStatusMessage = 'OFF';
-        }
-        break;
+}
+
+if ($projectorStatusMessage === '1') {
+    $projectorStatusMessage = '<span class="badge badge-pill badge-success">ON</span>';
+}
+if ($projectorStatusMessage === '2') {
+    $projectorStatusMessage = '<span class="badge badge-pill badge-danger">OFF</span>';
 }
 
 if ($pjlink->error) {
