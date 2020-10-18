@@ -85,14 +85,14 @@ $sequences = getAllSequences();
     <hr />
 
     <div class="row">
-        <div class="col-md-4">
-            <a class="btn btn-success" target="_blank" href="/pjlink/commands.php?command=ON">Turn On</a>
+        <div class="col-4">
+            <a class="btn btn-success" target="_blank" href="/pjlink.php?command=ON">Turn On</a>
         </div>
-        <div class="col-md-4">
-            <a class="btn btn-danger" target="_blank" href="/pjlink/commands.php?command=OFF">Turn Off</a>
+        <div class="col-4">
+            <a class="btn btn-danger" target="_blank" href="/pjlink.php?command=OFF">Turn Off</a>
         </div>
-        <div class="col-md-4">
-            <a class="btn btn-info" target="_blank" href="/pjlink/commands.php?command=STATUS">Turn On</a>
+        <div class="col-4">
+            <a class="btn btn-info" target="_blank" href="/pjlink.php?command=STATUS">Turn On</a>
         </div>
     </div>
 

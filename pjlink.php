@@ -1,6 +1,6 @@
 <?php
 
-include('pjlink.class.php');
+include('pjlink/pjlink.class.php');
 
 $request = $_GET['command'];
 $pjlink = new PJLink();
