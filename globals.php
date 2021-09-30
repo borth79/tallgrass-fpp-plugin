@@ -143,6 +143,7 @@ function postSchedule($apiKey=null, $fullPlaylist=null)
     $schedules = getSchedules();
     $activeSchedules = [];
     foreach ($schedules as $schedule) {
+        file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/debug.txt", json_encode($schedule));
         if ($schedule['enabled'] !== 1) {
             continue;
         }

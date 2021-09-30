@@ -12,7 +12,7 @@ $context = stream_context_create( $options );
 
 if ($_REQUEST['submission']) {
     // the form has been submitted
-
+    file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/debug.txt", 'The form has been submitted');
     // syncPlaylist
 
     $save = [
