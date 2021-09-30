@@ -70,6 +70,7 @@ while(true) {
     $responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
 
+    saveData('Post data for currently-playing', json_encode($postData), false, $pluginPath . "/xShowUpdater.txt");
     saveData('Response from tallgrasslights', json_encode($response), false, $pluginPath . "/xShowUpdater.txt");
 
     # change sleep timer to roughly time remaining on the song to reduce requests
