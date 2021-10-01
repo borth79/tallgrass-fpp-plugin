@@ -27,6 +27,9 @@ if ($projectorStatusMessage === '1') {
 if ($projectorStatusMessage === '2') {
     $projectorStatusMessage = '<span class="badge badge-pill badge-danger">OFF</span>';
 }
+if ($projectorStatusMessage === '3') {
+    $projectorStatusMessage = '<span class="badge badge-pill badge-warning">WARMING UP</span>';
+}
 
 if ($pjlink->error) {
     $projectorStatusMessage = $pjlink->error;
