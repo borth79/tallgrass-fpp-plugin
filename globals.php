@@ -142,16 +142,17 @@ function postSchedule($apiKey=null, $fullPlaylist=null)
 {
     $schedules = getSchedules();
     $activeSchedules = [];
-    foreach ($schedules as $schedule) {
-        file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/debug.txt", json_encode($schedule));
-        if ($schedule['enabled'] !== 1) {
-            continue;
-        }
-        if ($schedule['playlist'] !== $fullPlaylist) {
-            continue;
-        }
-        $activeSchedules[] = $schedule;
-    }
+    saveData('$playlist', json_encode($schedules), true, "/home/fpp/media/plugins/tallgrass-fpp-plugin/debug.txt");
+//    foreach ($schedules as $schedule) {
+//        file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/debug.txt", json_encode($schedule));
+//        if ($schedule['enabled'] !== 1) {
+//            continue;
+//        }
+//        if ($schedule['playlist'] !== $fullPlaylist) {
+//            continue;
+//        }
+//        $activeSchedules[] = $schedule;
+//    }
     $url = "http://api.tallgrasslights.com/api/xlights/show-schedule";
 
     $headers = [
@@ -160,7 +161,7 @@ function postSchedule($apiKey=null, $fullPlaylist=null)
 
     $postData = [
         'apiKey' => $apiKey,
-        'schedule' => $activeSchedules,
+        'schedule' => $schedules,
     ];
     file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/responsePostScheduleData.txt", json_encode($postData));
     $ch = curl_init();
