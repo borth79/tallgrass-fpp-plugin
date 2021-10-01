@@ -4,9 +4,10 @@ require_once "pjlink/pjlink.class.php";
 include('pjlink.config.php');
 $showInitiated = true;
 while(true) {
+    saveData('Start while loop', date('Y-m-d H:i:s'), true, $pluginPath . "/xShowUpdater.txt");
     // get store again in case the the apiKey is updated
     $store = json_decode(file_get_contents($pluginPath . "/store.json"));
-    saveData('Start while loop', date('Y-m-d H:i:s'), true, $pluginPath . "/xShowUpdater.txt");
+    saveData('store.json contents', file_get_contents($pluginPath . "/store.json"), false, $pluginPath . "/xShowUpdater.txt");
 
     $fppStatus = getFppStatus();
     $currentStatus = $fppStatus->status;
