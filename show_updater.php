@@ -10,9 +10,9 @@ while(true) {
 
     $fppStatus = getFppStatus();
     $currentStatus = $fppStatus->status;
+    saveData('Check show status', $currentStatus, false, $pluginPath . "/xShowUpdater.txt");
     if ($currentStatus !== 1) {
         $projectorStatus = $pjlink->getPowerState($store->projectorIP, '', '60', $port);
-        saveData('Check show status', $currentStatus, false, $pluginPath . "/xShowUpdater.txt");
         // show is off check projector status
         saveData('Show is disabled', '', true, $pluginPath . "/xShowUpdater.txt");
         saveData('Check Projector Status', $projectorStatus, false, $pluginPath . "/xShowUpdater.txt");
