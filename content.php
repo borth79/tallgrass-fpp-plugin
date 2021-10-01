@@ -89,7 +89,6 @@ $sequences = getAllSequences();
             <small id="projectorIpHelp" class="form-text text-muted">Enter your Projector IP Address</small>
         </div>
 
-        <div><?=$store->persistentProjector?></div>
         <div class="form-check">
             <input type="checkbox" class="form-check-input" name="persistentProjector" id="persistentProjector" aria-describedby="persistentProjectorHelp" value="1" <?=$store->persistentProjector === 1 ? 'checked' : ''?>>
             <label for="persistentProjector" class="form-check-label">Persistent Projector</label>
