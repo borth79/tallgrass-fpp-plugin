@@ -8,7 +8,7 @@ $projectorIp = $store->projectorIp;
 $persistentProjector = $store->persistentProjector;
 $projectorStatusMessage = '';
 
-$projectorStatusMessage = $pjlink->getPowerState($projectorIp, '', '60', $store->projectorPort);
+$projectorStatusMessage = $pjlink->getPowerState($projectorIp, '', '5', $store->projectorPort);
 switch($request) {
     case 'OFF':
         $pjlink->powerOff($projectorIp, '', '60', $store->projectorPort);
