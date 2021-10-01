@@ -39,7 +39,7 @@ $menuEntries = Array(
 	Array(
 		'text' => 'TallGrass Lights Repo',
 		'type' => 'help',
-		'page' => 'https://github.com/FalconChristmas/fpp-plugin-Template',
+		'page' => 'https://github.com/borth79/tallgrass-fpp-plugin',
 		'wrap' => 1
 	),
 //	Array(
