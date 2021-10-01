@@ -1,10 +1,10 @@
 <?php
 
 include('pjlink/pjlink.class.php');
-
+$store = json_decode(file_get_contents($pluginPath . "/store.json"));
 $request = $_POST['command'];
 $pjlink = new PJLink();
-$projectIP = '192.168.86.88';
+$projectIP = $store->projectorIp;
 $port = 4352;
 $projectorStatusMessage = '';
 
