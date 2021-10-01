@@ -1,1 +1,1 @@
-Template Plugin Help Page Placeholder
+<a href="https://github.com/borth79/tallgrass-fpp-plugin" target="_blank">TallGrassLights Github Repo</a>
