@@ -133,6 +133,5 @@ $sequences = getAllSequences();
 </div>
 
 <script>
-    setInterval();
-    alert('test');
+
 </script>
