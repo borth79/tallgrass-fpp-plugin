@@ -131,3 +131,7 @@ $sequences = getAllSequences();
     </form>
 
 </div>
+
+<script>
+    alert('test');
+</script>
