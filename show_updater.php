@@ -11,6 +11,7 @@ while(true) {
     $fppStatus = getFppStatus();
     $currentStatus = $fppStatus->status;
     if ($currentStatus !== 1) {
+        $projectorStatus = $pjlink->getPowerState($store->projectorIP, '', '60', $port);
         saveData('Check show status', $currentStatus, false, $pluginPath . "/xShowUpdater.txt");
         // show is off check projector status
         saveData('Show is disabled', '', true, $pluginPath . "/xShowUpdater.txt");
@@ -27,8 +28,8 @@ while(true) {
         sleep(20);
         continue;
     }
-    if ($currentStatus === 1 && ($persistentProjector || $showInitiated)) {
-        $projectorStatus = $pjlink->getPowerState($projectorIP, '', '60', $port);
+    if ($currentStatus === 1 && ($store->persistentProjector || $showInitiated)) {
+        $projectorStatus = $pjlink->getPowerState($store->projectorIP, '', '60', $port);
     }
     // turn on projector if not on and show is running
     if ($projectorStatus !== 1) {
