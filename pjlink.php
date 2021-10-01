@@ -18,6 +18,9 @@ switch($request) {
         break;
 }
 
+if ($projectorStatusMessage === '0') {
+    $projectorStatusMessage = '<span class="badge badge-pill badge-danger">OFF</span>';
+}
 if ($projectorStatusMessage === '1') {
     $projectorStatusMessage = '<span class="badge badge-pill badge-success">ON</span>';
 }
