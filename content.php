@@ -91,7 +91,7 @@ $sequences = getAllSequences();
 
         <div><?=$store->persistentProjector?></div>
         <div class="form-check">
-            <input type="checkbox" class="form-check-input" name="persistentProjector" id="persistentProjector" aria-describedby="persistentProjectorHelp" value="1" <?=$store->persistentProjector === 1 ? 'checked' : ''?>">
+            <input type="checkbox" class="form-check-input" name="persistentProjector" id="persistentProjector" aria-describedby="persistentProjectorHelp" value="1" <?=$store->persistentProjector === 1 ? 'checked' : ''?>>
             <label for="persistentProjector" class="form-check-label">Persistent Projector</label>
             <small id="persistentProjectorHelp" class="form-text text-muted">This will attempt to turn on the projector at regular intervals. If unchecked, FPP will only attempt to start the projector when the show beings.</small>
         </div>
