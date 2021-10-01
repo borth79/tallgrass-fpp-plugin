@@ -4,18 +4,18 @@ include('pjlink/pjlink.class.php');
 $store = json_decode(file_get_contents($pluginPath . "/store.json"));
 $request = $_POST['command'];
 $pjlink = new PJLink();
-$projectorIP = $store->projectorIp;
+$projectorIp = $store->projectorIp;
 $persistentProjector = $store->persistentProjector;
 $port = 4352;
 $projectorStatusMessage = '';
 
-$projectorStatusMessage = $pjlink->getPowerState($projectorIP, '', '60', $port);
+$projectorStatusMessage = $pjlink->getPowerState($projectorIp, '', '60', $port);
 switch($request) {
     case 'OFF':
-        $pjlink->powerOff($projectorIP, '', '60', $port);
+        $pjlink->powerOff($projectorIp, '', '60', $port);
         break;
     case 'ON':
-        $pjlink->powerOn($projectorIP, '', '60', $port);
+        $pjlink->powerOn($projectorIp, '', '60', $port);
         break;
 }
 

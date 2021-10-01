@@ -12,20 +12,20 @@ while(true) {
     saveData('apiKey', $store->apiKey, false, $pluginPath . "/xShowUpdater.txt");
     saveData('autoplayPlaylist', $store->autoplayPlaylist, false, $pluginPath . "/xShowUpdater.txt");
     saveData('fullPlaylist', $store->fullPlaylist, false, $pluginPath . "/xShowUpdater.txt");
-    saveData('projectorIP', $store->projectorIP, false, $pluginPath . "/xShowUpdater.txt");
+    saveData('projectorIp', $store->projectorIp, false, $pluginPath . "/xShowUpdater.txt");
     saveData('persistentProjector', $store->persistentProjector, false, $pluginPath . "/xShowUpdater.txt");
 
     $fppStatus = getFppStatus();
     $currentStatus = $fppStatus->status;
     saveData('Check show status', $currentStatus, false, $pluginPath . "/xShowUpdater.txt");
     if ($currentStatus !== 1) {
-        $projectorStatus = $pjlink->getPowerState($store->projectorIP, '', '60', $port);
+        $projectorStatus = $pjlink->getPowerState($store->projectorIp, '', '60', $port);
         // show is off check projector status
         saveData('Show is disabled', '', false, $pluginPath . "/xShowUpdater.txt");
         saveData('Check Projector Status', $projectorStatus, false, $pluginPath . "/xShowUpdater.txt");
         if ($projectorStatus !== 2) {
             saveData('Turning off power',
-                $pjlink->powerOff($projectorIP, '', '60', $port),
+                $pjlink->powerOff($projectorIp, '', '60', $port),
                 false,
                 $pluginPath . "/xShowUpdater.txt"
             );
@@ -36,17 +36,17 @@ while(true) {
         continue;
     }
     if ($currentStatus === 1 && ($store->persistentProjector || $showInitiated)) {
-        $projectorStatus = $pjlink->getPowerState($store->projectorIP, '', '60', $port);
+        $projectorStatus = $pjlink->getPowerState($store->projectorIp, '', '60', $port);
     }
     // turn on projector if not on and show is running
     if ($projectorStatus !== 1) {
         saveData('Projector Settings',
-            'IP: ' . $store->projectorIP . ', Port: ' . $port,
+            'IP: ' . $store->projectorIp . ', Port: ' . $port,
             false,
             $pluginPath . "/xShowUpdater.txt"
         );
         saveData('Turning on power',
-            $pjlink->powerOn($store->projectorIP, '', '60', $port),
+            $pjlink->powerOn($store->projectorIp, '', '60', $port),
             false,
             $pluginPath . "/xShowUpdater.txt"
         );
