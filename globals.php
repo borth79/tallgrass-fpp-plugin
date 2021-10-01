@@ -142,7 +142,7 @@ function postSchedule($apiKey=null, $fullPlaylist=null)
 {
     $schedules = getSchedules();
     $activeSchedules = [];
-    saveData('$playlist', json_encode($schedules), true, "/home/fpp/media/plugins/tallgrass-fpp-plugin/debug.txt");
+    saveData('postSchedule()', json_encode($schedules), true, "/home/fpp/media/plugins/tallgrass-fpp-plugin/debug.txt");
 //    foreach ($schedules as $schedule) {
 //        file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/debug.txt", json_encode($schedule));
 //        if ($schedule['enabled'] !== 1) {
@@ -161,7 +161,7 @@ function postSchedule($apiKey=null, $fullPlaylist=null)
 
     $postData = [
         'apiKey' => $apiKey,
-        'schedule' => $schedules,
+        'schedule' => json_encode($schedules),
     ];
     file_put_contents("/home/fpp/media/plugins/tallgrass-fpp-plugin/responsePostScheduleData.txt", json_encode($postData));
     $ch = curl_init();
