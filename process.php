@@ -19,6 +19,7 @@ if ($_REQUEST['submission']) {
         'apiKey' => $_REQUEST['apiKey'],
         'autoplayPlaylist' => $_REQUEST['autoplayPlaylist'],
         'fullPlaylist' => $_REQUEST['fullPlaylist'],
+        'projectorIp' => $_REQUEST['projectorIp'],
     ];
 
     $schedules = getSchedules();
