@@ -6,13 +6,12 @@ $request = $_POST['command'];
 $pjlink = new PJLink();
 $projectorIp = $store->projectorIp;
 $persistentProjector = $store->persistentProjector;
-$port = 4352;
 $projectorStatusMessage = '';
 
-$projectorStatusMessage = $pjlink->getPowerState($projectorIp, '', '60', $port);
+$projectorStatusMessage = $pjlink->getPowerState($projectorIp, '', '60', $store->projectorPort);
 switch($request) {
     case 'OFF':
-        $pjlink->powerOff($projectorIp, '', '60', $port);
+        $pjlink->powerOff($projectorIp, '', '60', $store->projectorPort);
         break;
     case 'ON':
         $pjlink->powerOn($projectorIp, '', '60', $store->projectorPort);
