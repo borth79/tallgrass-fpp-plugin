@@ -84,7 +84,7 @@ $sequences = getAllSequences();
 
         <div class="form-group">
             <label for="apiKey">Projector IP Address</label>
-            <input type="password" class="form-control" name="projectorIp" id="projector_ip" aria-describedby="projectorIpHelp" value="<?=$store->projectorIp?>">
+            <input type="text" class="form-control" name="projectorIp" id="projector_ip" aria-describedby="projectorIpHelp" value="<?=$store->projectorIp?>">
             <small id="projectorIpHelp" class="form-text text-muted">Enter your Projector IP Address</small>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
