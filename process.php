@@ -20,6 +20,7 @@ if ($_REQUEST['submission']) {
         'autoplayPlaylist' => $_REQUEST['autoplayPlaylist'],
         'fullPlaylist' => $_REQUEST['fullPlaylist'],
         'projectorIp' => $_REQUEST['projectorIp'],
+        'projectorPort' => $_REQUEST['projectorPort'],
         'persistentProjector' => $_REQUEST['persistentProjector'] ? $_REQUEST['persistentProjector'] * 1 : 0,
     ];
 

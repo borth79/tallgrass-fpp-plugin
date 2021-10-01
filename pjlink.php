@@ -15,7 +15,7 @@ switch($request) {
         $pjlink->powerOff($projectorIp, '', '60', $port);
         break;
     case 'ON':
-        $pjlink->powerOn($projectorIp, '', '60', $port);
+        $pjlink->powerOn($projectorIp, '', '60', $store->projectorPort);
         break;
 }
 

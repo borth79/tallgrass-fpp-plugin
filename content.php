@@ -82,11 +82,17 @@ $sequences = getAllSequences();
             <small id="fullPlaylistHelp" class="form-text text-muted">Sync your full playlist with TallGrassLights.com</small>
         </div>
 
-        <h4>Projector</h4>
+        <h5>Projector Configuration</h5>
         <div class="form-group">
             <label for="projectorIp">IP Address</label>
-            <input type="text" class="form-control" name="projectorIp" id="projector_ip" aria-describedby="projectorIpHelp" value="<?=$store->projectorIp?>">
+            <input type="text" class="form-control" name="projectorIp" id="projectorIp" aria-describedby="projectorIpHelp" value="<?=$store->projectorIp?>">
             <small id="projectorIpHelp" class="form-text text-muted">Enter your Projector IP Address</small>
+        </div>
+
+        <div class="form-group">
+            <label for="projectorPort">Port</label>
+            <input type="text" class="form-control" name="projectorPort" id="projectorPort" aria-describedby="projectorPortHelp" value="<?=$store->projectorPort?>">
+            <small id="projectorPortHelp" class="form-text text-muted">Enter your Projector port</small>
         </div>
 
         <div class="form-check mb-2">
@@ -97,7 +103,7 @@ $sequences = getAllSequences();
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
-    <h4>Projector</h4>
+    <h4 class="mt-5">Run Projector Command</h4>
     <hr />
 
     <form method="post" action="/plugin.php?plugin=tallgrass-fpp-plugin&page=content.php">

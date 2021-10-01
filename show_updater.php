@@ -25,7 +25,7 @@ while(true) {
         saveData('Check Projector Status', $projectorStatus, false, $pluginPath . "/xShowUpdater.txt");
         if ($projectorStatus !== 2) {
             saveData('Turning off power',
-                $pjlink->powerOff($projectorIp, '', '60', $port),
+                $pjlink->powerOff($projectorIp, '', '60', $store->projectorPort),
                 false,
                 $pluginPath . "/xShowUpdater.txt"
             );
@@ -36,17 +36,17 @@ while(true) {
         continue;
     }
     if ($currentStatus === 1 && ($store->persistentProjector || $showInitiated)) {
-        $projectorStatus = $pjlink->getPowerState($store->projectorIp, '', '60', $port);
+        $projectorStatus = $pjlink->getPowerState($store->projectorIp, '', '60', $store->projectorPort);
     }
     // turn on projector if not on and show is running
     if ($projectorStatus !== 1) {
         saveData('Projector Settings',
-            'IP: ' . $store->projectorIp . ', Port: ' . $port,
+            'IP: ' . $store->projectorIp . ', Port: ' . $store->projectorPort,
             false,
             $pluginPath . "/xShowUpdater.txt"
         );
         saveData('Turning on power',
-            $pjlink->powerOn($store->projectorIp, '', '60', $port),
+            $pjlink->powerOn($store->projectorIp, '', '60', $store->projectorPort),
             false,
             $pluginPath . "/xShowUpdater.txt"
         );
