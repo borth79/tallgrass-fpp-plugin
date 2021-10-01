@@ -34,7 +34,7 @@ while(true) {
     // turn on projector if not on and show is running
     if ($projectorStatus !== 1) {
         saveData('Turning on power',
-            $pjlink->powerOn($projectorIP, '', '60', $port),
+            $pjlink->powerOn($store->projectorIP, '', '60', $port),
             false,
             $pluginPath . "/xShowUpdater.txt"
         );
