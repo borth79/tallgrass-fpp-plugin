@@ -9,6 +9,12 @@ while(true) {
     $store = json_decode(file_get_contents($pluginPath . "/store.json"));
     saveData('store.json contents', file_get_contents($pluginPath . "/store.json"), false, $pluginPath . "/xShowUpdater.txt");
 
+    saveData('apiKey', $store->apiKey, false, $pluginPath . "/xShowUpdater.txt");
+    saveData('autoplayPlaylist', $store->autoplayPlaylist, false, $pluginPath . "/xShowUpdater.txt");
+    saveData('fullPlaylist', $store->fullPlaylist, false, $pluginPath . "/xShowUpdater.txt");
+    saveData('projectorIP', $store->projectorIP, false, $pluginPath . "/xShowUpdater.txt");
+    saveData('persistentProjector', $store->persistentProjector, false, $pluginPath . "/xShowUpdater.txt");
+
     $fppStatus = getFppStatus();
     $currentStatus = $fppStatus->status;
     saveData('Check show status', $currentStatus, false, $pluginPath . "/xShowUpdater.txt");
