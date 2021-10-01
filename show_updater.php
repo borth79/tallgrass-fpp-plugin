@@ -2,7 +2,7 @@
 require_once "globals.php";
 require_once "pjlink/pjlink.class.php";
 include('pjlink.config.php');
-
+$showInitiated = true;
 while(true) {
     // get store again in case the the apiKey is updated
     $store = json_decode(file_get_contents($pluginPath . "/store.json"));
@@ -27,7 +27,7 @@ while(true) {
         sleep(20);
         continue;
     }
-    if ($currentStatus === 1) {
+    if ($currentStatus === 1 && ($persistentProjector || $showInitiated)) {
         $projectorStatus = $pjlink->getPowerState($projectorIP, '', '60', $port);
     }
     // turn on projector if not on and show is running
@@ -81,5 +81,6 @@ while(true) {
     // get next song
     updateSongQueue($store->apiKey);
 
+    $showInitiated = false;
     sleep($sleepTime);
 }

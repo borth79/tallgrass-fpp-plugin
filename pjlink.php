@@ -5,6 +5,7 @@ $store = json_decode(file_get_contents($pluginPath . "/store.json"));
 $request = $_POST['command'];
 $pjlink = new PJLink();
 $projectorIP = $store->projectorIp;
+$persistentProjector = $store->persistentProjector;
 $port = 4352;
 $projectorStatusMessage = '';
 

@@ -20,6 +20,7 @@ if ($_REQUEST['submission']) {
         'autoplayPlaylist' => $_REQUEST['autoplayPlaylist'],
         'fullPlaylist' => $_REQUEST['fullPlaylist'],
         'projectorIp' => $_REQUEST['projectorIp'],
+        'persistentProjector' => $_REQUEST['persistentProjector'],
     ];
 
     $schedules = getSchedules();

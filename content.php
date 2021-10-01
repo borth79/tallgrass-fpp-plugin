@@ -82,10 +82,17 @@ $sequences = getAllSequences();
             <small id="fullPlaylistHelp" class="form-text text-muted">Sync your full playlist with TallGrassLights.com</small>
         </div>
 
+        <h4>Projector</h4>
         <div class="form-group">
-            <label for="apiKey">Projector IP Address</label>
+            <label for="projectorIp">IP Address</label>
             <input type="text" class="form-control" name="projectorIp" id="projector_ip" aria-describedby="projectorIpHelp" value="<?=$store->projectorIp?>">
             <small id="projectorIpHelp" class="form-text text-muted">Enter your Projector IP Address</small>
+        </div>
+
+        <div class="form-group">
+            <label for="persistentProjector">IP Address</label>
+            <input type="checkbox" class="form-control" name="persistentProjector" id="persistentProjector" aria-describedby="persistentProjectorHelp" value="1" checked="<?=$store->persistentProjector===true?>">
+            <small id="persistentProjectorHelp" class="form-text text-muted">This will attempt to turn on the projector at regular intervals. If unchecked, FPP will only attempt to start the projector when the show beings.</small>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
