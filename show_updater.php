@@ -62,7 +62,7 @@ while(true) {
     if (!empty($fppStatus->current_song)) {
         $musicMeta = getMusicMeta($fppStatus->current_song);
     }
-
+    saveData('DEBUG', json_encode($sequecneData), false, $pluginPath . "/xShowUpdater.txt");
     $postData = [
         'apiKey' => $store->apiKey,
         'song_id' => $sequecneData->ID,
