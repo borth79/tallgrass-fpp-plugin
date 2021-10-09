@@ -63,31 +63,35 @@ while(true) {
         $musicMeta = getMusicMeta($fppStatus->current_song);
     }
 
-    $postData = [
-        'apiKey' => $store->apiKey,
-        'song_id' => $sequecneData->ID,
-        'file_name' => $sequecneData->Name,
-        'start_time' => date('Y-m-d H:i:s', time() - $fppStatus->seconds_elapsed),
-        'end_time' => date('Y-m-d H:i:s', time() + $fppStatus->seconds_remaining),
-    ];
-    saveData('Post data to tallgrasslights', json_encode($postData), false, $pluginPath . "/xShowUpdater.txt");
+    if ($musicMeta->Name !== 'Pick-Next-Song.fseq') {
+        $postData = [
+            'apiKey' => $store->apiKey,
+            'song_id' => $sequecneData->ID,
+            'file_name' => $sequecneData->Name,
+            'start_time' => date('Y-m-d H:i:s', time() - $fppStatus->seconds_elapsed),
+            'end_time' => date('Y-m-d H:i:s', time() + $fppStatus->seconds_remaining),
+        ];
+        saveData('Post data to tallgrasslights', json_encode($postData), false, $pluginPath . "/xShowUpdater.txt");
 
-    $url = "http://api.tallgrasslights.com/api/xlights/currently-playing";
-    $headers = [
-        'Content-Type: application/json',
-    ];
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-    curl_setopt($ch, CURLOPT_POST, 1);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($postData));
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    $response = json_decode(curl_exec($ch));
-    $responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    curl_close($ch);
+        $url = "http://api.tallgrasslights.com/api/xlights/currently-playing";
+        $headers = [
+            'Content-Type: application/json',
+        ];
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($postData));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $response = json_decode(curl_exec($ch));
+        $responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
 
-    saveData('Post data for currently-playing', json_encode($postData), false, $pluginPath . "/xShowUpdater.txt");
-    saveData('Response from tallgrasslights', json_encode($response), false, $pluginPath . "/xShowUpdater.txt");
+        saveData('Post data for currently-playing', json_encode($postData), false, $pluginPath . "/xShowUpdater.txt");
+        saveData('Response from tallgrasslights', json_encode($response), false, $pluginPath . "/xShowUpdater.txt");
+    } else {
+        saveData('Skip: Post data for currently-playing', 'Playing in between song', false, $pluginPath . "/xShowUpdater.txt");
+    }
 
     # change sleep timer to roughly time remaining on the song to reduce requests
     $sleepTime = $fppStatus->seconds_remaining > 0 ? $fppStatus->seconds_remaining + 2 : 20;
