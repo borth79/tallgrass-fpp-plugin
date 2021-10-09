@@ -297,19 +297,12 @@ function updateSongQueue($apiKey) {
 
     # Get in between sequence
     $inBetweenFile = 'Pick-Next-Song.fseq';
-    $inBetweenSequecneData = getSequenceData('Pick-Next-Song.fseq');
-    if (!isset($inBetweenSequecneData)) {
-        saveData('getSequenceData(' . $inBetweenFile . ')', json_encode($inBetweenSequecneData), false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xNextSongResponse.txt");
-        $inBetweenMediaPath = explode("/", $inBetweenSequecneData->variableHeaders->mf);
+    $inBetweenSequenceData = getSequenceData($inBetweenFile);
+    if (!empty($inBetweenSequenceData)) {
+        saveData('getSequenceData(' . $inBetweenFile . ')', json_encode($inBetweenSequenceData), false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xNextSongResponse.txt");
+        $inBetweenMediaPath = explode("/", $inBetweenSequenceData->variableHeaders->mf);
         $inBetweenMediaFile = end($inBetweenMediaPath);
-        saveData('Media File: ', $inBetweenMediaFile, false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xNextSongResponse.txt");
-
-        # TODO: This will fail if it has no media
         $inBetweenMediaDuration = getMusicDuration($inBetweenMediaFile);
-        $inBetweenMediaDurationX = explode(':', secondsToTime(round($inBetweenMediaDuration)));
-        $inBetweenMediaDurationString = $inBetweenMediaDurationX[1] . 'm:' . $inBetweenMediaDurationX[2] . 's';
-        saveData('Media Duration: ', json_encode($inBetweenMediaDuration), false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xNextSongResponse.txt");
-
         $songList[] = [
             'type' => 'both',
             'enabled' => 1,
