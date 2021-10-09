@@ -89,6 +89,9 @@ while(true) {
 
         saveData('Post data for currently-playing', json_encode($postData), false, $pluginPath . "/xShowUpdater.txt");
         saveData('Response from tallgrasslights', json_encode($response), false, $pluginPath . "/xShowUpdater.txt");
+
+        // get next song
+        updateSongQueue($store->apiKey);
     } else {
         saveData('Skip: Post data for currently-playing', 'Playing in between song', false, $pluginPath . "/xShowUpdater.txt");
     }
@@ -96,8 +99,6 @@ while(true) {
     # change sleep timer to roughly time remaining on the song to reduce requests
     $sleepTime = $fppStatus->seconds_remaining > 0 ? $fppStatus->seconds_remaining + 2 : 20;
 
-    // get next song
-    updateSongQueue($store->apiKey);
 
     $showInitiated = false;
     sleep($sleepTime);
