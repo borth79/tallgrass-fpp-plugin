@@ -344,11 +344,11 @@ function getRunningEffects()
     curl_close($ch);
     saveData('Response from /fppxml.php?command=getRunningEffects', $response, false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xShowUpdater.txt");
     $effects = simplexml_load_string($response);
-    foreach (get_object_vars($effects) as $key => $val) {
+    foreach (get_object_vars($effects->RunningEffect) as $key => $val) {
         saveData('temp', $key, false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xShowUpdater.txt");
-
     }
     foreach ($effects->RunningEffect as $effect) {
+        saveData('temp', $effect->name, false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xShowUpdater.txt");
         $runningEffects[] = $effect->name;
     }
     return $runningEffects;
