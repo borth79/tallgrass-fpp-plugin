@@ -6,7 +6,7 @@ $showInitiated = true;
 while(true) {
     saveData('Start while loop', date('Y-m-d H:i:s'), true, $pluginPath . "/xShowUpdater.txt");
     // start the Tune To Sign and loop the effect
-    if ($showInitiated && file_exists('./scrips/startTuneToSign.sh')) {
+    if ($showInitiated && file_exists('/media/plugins/tallgrasslights-fpp-plugin/scrips/startTuneToSign.sh')) {
         exec('./scrips/startTuneToSign.sh', $output);
         saveData('Start Tune To Sign', $output[0], false, $pluginPath . "/xShowUpdater.txt");
     } elseif(!file_exists('./scrips/startTuneToSign.sh')) {
