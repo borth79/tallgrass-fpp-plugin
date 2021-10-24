@@ -3,14 +3,15 @@ require_once "globals.php";
 require_once "pjlink/pjlink.class.php";
 include('pjlink.config.php');
 $showInitiated = true;
+$tuneToSignPath = $pluginPath . 'scrips/startTuneToSign.sh';
 while(true) {
     saveData('Start while loop', date('Y-m-d H:i:s'), true, $pluginPath . "/xShowUpdater.txt");
     // start the Tune To Sign and loop the effect
-    if ($showInitiated && file_exists('/media/plugins/tallgrasslights-fpp-plugin/scrips/startTuneToSign.sh')) {
-        exec('./scrips/startTuneToSign.sh', $output);
-        saveData('Start Tune To Sign', $output[0], false, $pluginPath . "/xShowUpdater.txt");
+    if ($showInitiated && file_exists($tuneToSignPath)) {
+        exec($tuneToSignPath, $output);
+        saveData('Start Tune To Sign', $output[0], false, $tuneToSignPath . "/xShowUpdater.txt");
     } elseif(!file_exists('./scrips/startTuneToSign.sh')) {
-        saveData('Start Tune To Sign', './scrips/startTuneToSign.sh does not exist. Path: ' . getcwd(), false, $pluginPath . "/xShowUpdater.txt");
+        saveData('Start Tune To Sign', './scrips/startTuneToSign.sh does not exist. Path: ' . $tuneToSignPath, false, $pluginPath . "/xShowUpdater.txt");
     }
     // get store again in case the the apiKey is updated
     $store = json_decode(file_get_contents($pluginPath . "/store.json"));
