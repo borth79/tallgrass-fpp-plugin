@@ -6,11 +6,10 @@ $showInitiated = true;
 while(true) {
     saveData('Start while loop', date('Y-m-d H:i:s'), true, $pluginPath . "/xShowUpdater.txt");
     // start the Tune To Sign and loop the effect
-    if ($showInitiated && file_exists(getcwd() .'scrips/startTuneToSign.sh')) {
+    if ($showInitiated && file_exists('./scrips/startTuneToSign.sh')) {
         exec('./scrips/startTuneToSign.sh', $output);
         saveData('Start Tune To Sign', $output, false, $pluginPath . "/xShowUpdater.txt");
     } elseif(!file_exists('./scrips/startTuneToSign.sh')) {
-        $path = '';
         saveData('Start Tune To Sign', './scrips/startTuneToSign.sh does not exist. Path: ' . getcwd(), false, $pluginPath . "/xShowUpdater.txt");
     }
     // get store again in case the the apiKey is updated
