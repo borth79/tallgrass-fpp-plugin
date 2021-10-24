@@ -8,15 +8,13 @@ while(true) {
     saveData('Start while loop', date('Y-m-d H:i:s'), true, $pluginPath . "/xShowUpdater.txt");
     saveData('Plugin Path', $pluginPath, false, $pluginPath . "/xShowUpdater.txt");
     // start the Tune To Sign and loop the effect
-    if ($showInitiated && file_exists($tuneToSignPath)) {
-        exec($tuneToSignPath, $output);
+    if ($showInitiated) {
+        exec('fpp -e "TuneToMatrix,0,1"', $output);
         foreach ($output as $line) {
             $outputData .= $line."\n";
         }
         saveData('Start Tune To Sign', 'Begin', false, $pluginPath . "/xShowUpdater.txt");
         saveData('Tune To Sign execution output', $outputData, false, $pluginPath . "/xShowUpdater.txt");
-    } elseif($showInitiated) {
-        saveData('Start Tune To Sign', 'Tune to sign script does not exist. Path: ' . $tuneToSignPath, false, $pluginPath . "/xShowUpdater.txt");
     }
     // get store again in case the the apiKey is updated
     $store = json_decode(file_get_contents($pluginPath . "/store.json"));
