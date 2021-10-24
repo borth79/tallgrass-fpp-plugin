@@ -348,9 +348,9 @@ function getRunningEffects()
         saveData('temp', $key, false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xShowUpdater.txt");
     }
     foreach ($effects->RunningEffect as $effect) {
-        saveData('temp', gettype($effect), false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xShowUpdater.txt");
-        saveData('$effect->Name: ', $effect->name, false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xShowUpdater.txt");
-        $runningEffects[] = $effect->name;
+//        saveData('temp', gettype($effect), false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xShowUpdater.txt");
+        saveData('$effect->Name: ', $effect->Name, false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xShowUpdater.txt");
+        $runningEffects[] = $effect->Name;
     }
     return $runningEffects;
 }
