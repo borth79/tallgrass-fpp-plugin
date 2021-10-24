@@ -5,6 +5,11 @@ include('pjlink.config.php');
 $showInitiated = true;
 while(true) {
     saveData('Start while loop', date('Y-m-d H:i:s'), true, $pluginPath . "/xShowUpdater.txt");
+    // start the Tune To Sign and loop the effect
+    if ($showInitiated && file_exists('./scrips/startTuneToSign.sh')) {
+        exec('./scrips/startTuneToSign.sh', $output);
+        saveData('Start Tune To Sign', $output, false, $pluginPath . "/xShowUpdater.txt");
+    }
     // get store again in case the the apiKey is updated
     $store = json_decode(file_get_contents($pluginPath . "/store.json"));
     saveData('store.json contents', file_get_contents($pluginPath . "/store.json"), false, $pluginPath . "/xShowUpdater.txt");
