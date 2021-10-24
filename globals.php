@@ -344,7 +344,7 @@ function getRunningEffects()
     curl_close($ch);
     saveData('Response from /fppxml.php?command=getRunningEffects', $response, false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xShowUpdater.txt");
     $effects = simplexml_load_string($response);
-    foreach ($effects['RunningEffects'] as $effect) {
+    foreach ($effects->RunningEffects as $effect) {
         $runningEffects[] = $effect->name;
     }
     return $runningEffects;
