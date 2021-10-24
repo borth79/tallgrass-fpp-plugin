@@ -334,3 +334,18 @@ function updateSongQueue($apiKey) {
     saveData(null, json_encode($playlistFile), true, "/home/fpp/media/playlists/Song_Queue.json");
 }
 
+function getRunningEffects()
+{
+    $url = "http://127.0.0.1/fppxml.php?command=getRunningEffects";
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    saveData('Response from /fppxml.php?command=getRunningEffects', json_encode($response), false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xShowUpdater.txt");
+    $effects = new SimpleXMLElement($response);
+    foreach ($effects['RunningEffects'] as $effect) {
+        $runningEffects[] = $effect->name;
+    }
+    return $runningEffects;
+}
