@@ -8,7 +8,7 @@ while(true) {
     // start the Tune To Sign and loop the effect
     if ($showInitiated && file_exists('./scrips/startTuneToSign.sh')) {
         exec('./scrips/startTuneToSign.sh', $output);
-        saveData('Start Tune To Sign', $output, false, $pluginPath . "/xShowUpdater.txt");
+        saveData('Start Tune To Sign', $output[0], false, $pluginPath . "/xShowUpdater.txt");
     } elseif(!file_exists('./scrips/startTuneToSign.sh')) {
         saveData('Start Tune To Sign', './scrips/startTuneToSign.sh does not exist. Path: ' . getcwd(), false, $pluginPath . "/xShowUpdater.txt");
     }
