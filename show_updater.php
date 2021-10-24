@@ -53,6 +53,10 @@ while(true) {
     if ($currentStatus === 1) {
         $effects = getRunningEffects();
         if (!in_array($tuneToSignEffect, $effects)) {
+            foreach ($effects as $effect) {
+                saveData('Effect Running', $effect, false, $pluginPath . "/xShowUpdater.txt");
+            }
+
             exec('fpp -e "TuneToMatrix,0,1"', $output);
             foreach ($output as $line) {
                 $outputData .= $line."\n";
