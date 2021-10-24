@@ -11,7 +11,7 @@ while(true) {
         saveData('Start Tune To Sign', $output, false, $pluginPath . "/xShowUpdater.txt");
     } elseif(!file_exists('./scrips/startTuneToSign.sh')) {
         $path = '';
-        exex('pwd', $path);
+        exec('pwd', $path);
         saveData('Start Tune To Sign', './scrips/startTuneToSign.sh does not exist. Path: ' . $path, false, $pluginPath . "/xShowUpdater.txt");
     }
     // get store again in case the the apiKey is updated
