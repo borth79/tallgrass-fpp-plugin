@@ -6,6 +6,7 @@ $showInitiated = true;
 $tuneToSignPath = $pluginPath . '/scripts/startTuneToSign.sh';
 while(true) {
     saveData('Start while loop', date('Y-m-d H:i:s'), true, $pluginPath . "/xShowUpdater.txt");
+    saveData('Plugin Path', $pluginPath, false, $pluginPath . "/xShowUpdater.txt");
     // start the Tune To Sign and loop the effect
     if ($showInitiated && file_exists($tuneToSignPath)) {
         $output = shell_exec($tuneToSignPath);
