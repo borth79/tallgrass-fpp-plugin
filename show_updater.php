@@ -5,11 +5,15 @@ include('pjlink.config.php');
 $showInitiated = true;
 $tuneToSignEffect = 'TuneToMatrix';
 while(true) {
+    sleep(2);
+
+    saveData('Start while loop', date('Y-m-d H:i:s'), true, $pluginPath . "/xShowUpdater.txt");
+//    saveData('Plugin Path', $pluginPath, false, $pluginPath . "/xShowUpdater.txt");
+
+    // get show status
     $fppStatus = getFppStatus();
     $currentStatus = $fppStatus->status;
 
-    saveData('Start while loop', date('Y-m-d H:i:s'), true, $pluginPath . "/xShowUpdater.txt");
-    saveData('Plugin Path', $pluginPath, false, $pluginPath . "/xShowUpdater.txt");
     // start the Tune To Sign and loop the effect
     if ($currentStatus === 1) {
         $effects = getRunningEffects();
