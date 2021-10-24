@@ -348,7 +348,7 @@ function getRunningEffects()
         saveData('temp', $key, false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xShowUpdater.txt");
 
     }
-    foreach ($effects->RunningEffects as $effect) {
+    foreach ($effects->RunningEffect as $effect) {
         $runningEffects[] = $effect->name;
     }
     return $runningEffects;
