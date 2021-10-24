@@ -3,7 +3,7 @@ require_once "globals.php";
 require_once "pjlink/pjlink.class.php";
 include('pjlink.config.php');
 $showInitiated = true;
-$tuneToSignPath = $pluginPath . 'scrips/startTuneToSign.sh';
+$tuneToSignPath = $pluginPath . '/scripts/startTuneToSign.sh';
 while(true) {
     saveData('Start while loop', date('Y-m-d H:i:s'), true, $pluginPath . "/xShowUpdater.txt");
     // start the Tune To Sign and loop the effect
