@@ -30,6 +30,9 @@ while(true) {
     $currentStatus = $fppStatus->status;
     saveData('Check show status', $currentStatus, false, $pluginPath . "/xShowUpdater.txt");
     if ($currentStatus !== 1) {
+        // stop effects
+        exec('fpp -e "TuneToMatrix', $output);
+
         $projectorStatus = $pjlink->getPowerState($store->projectorIp, '', '60', $store->projectorPort);
         // show is off check projector status
         saveData('Show is disabled', '', false, $pluginPath . "/xShowUpdater.txt");
