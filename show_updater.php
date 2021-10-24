@@ -9,9 +9,12 @@ while(true) {
     saveData('Plugin Path', $pluginPath, false, $pluginPath . "/xShowUpdater.txt");
     // start the Tune To Sign and loop the effect
     if ($showInitiated && file_exists($tuneToSignPath)) {
-        $output = shell_exec($tuneToSignPath);
+        exec($tuneToSignPath, $output);
+        foreach ($output as $line) {
+            $outputData .= $line."\n";
+        }
         saveData('Start Tune To Sign', 'Begin', false, $pluginPath . "/xShowUpdater.txt");
-        saveData('Start Tune To Sign', $output, false, $pluginPath . "/xShowUpdater.txt");
+        saveData('Tune To Sign execution output', $outputData, false, $pluginPath . "/xShowUpdater.txt");
     } elseif($showInitiated) {
         saveData('Start Tune To Sign', 'Tune to sign script does not exist. Path: ' . $tuneToSignPath, false, $pluginPath . "/xShowUpdater.txt");
     }
