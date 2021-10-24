@@ -342,7 +342,7 @@ function getRunningEffects()
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     $response = curl_exec($ch);
     curl_close($ch);
-    saveData('Response from /fppxml.php?command=getRunningEffects', json_encode($response), false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xShowUpdater.txt");
+    saveData('Response from /fppxml.php?command=getRunningEffects', $response, false, "/home/fpp/media/plugins/tallgrass-fpp-plugin/xShowUpdater.txt");
     $effects = simplexml_load_string($response);
     foreach ($effects['RunningEffects'] as $effect) {
         $runningEffects[] = $effect->name;
