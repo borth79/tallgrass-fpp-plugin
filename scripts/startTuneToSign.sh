@@ -1,2 +1,2 @@
 EFFECTNAME="Tune To Matrix"
-fpp -e "${EFFECTNAME},1,0"
+fpp -e "${EFFECTNAME},0,1"
