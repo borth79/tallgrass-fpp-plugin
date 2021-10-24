@@ -52,11 +52,10 @@ while(true) {
     // start the Tune To Sign and loop the effect
     if ($currentStatus === 1) {
         $effects = getRunningEffects();
+        foreach ($effects as $effect) {
+            saveData('Effect Running', $effect, false, $pluginPath . "/xShowUpdater.txt");
+        }
         if (!in_array($tuneToSignEffect, $effects)) {
-            foreach ($effects as $effect) {
-                saveData('Effect Running', $effect, false, $pluginPath . "/xShowUpdater.txt");
-            }
-
             exec('fpp -e "TuneToMatrix,0,1"', $output);
             foreach ($output as $line) {
                 $outputData .= $line."\n";
