@@ -5,8 +5,6 @@ include('pjlink.config.php');
 $showInitiated = true;
 $tuneToSignEffect = 'TuneToMatrix';
 while(true) {
-    sleep(2);
-
     saveData('Start while loop', date('Y-m-d H:i:s'), true, $pluginPath . "/xShowUpdater.txt");
 //    saveData('Plugin Path', $pluginPath, false, $pluginPath . "/xShowUpdater.txt");
 
@@ -15,17 +13,17 @@ while(true) {
     $currentStatus = $fppStatus->status;
 
     // start the Tune To Sign and loop the effect
-    if ($currentStatus === 1) {
-        $effects = getRunningEffects();
-        if (!in_array($tuneToSignEffect, $effects)) {
-            exec('fpp -e "TuneToMatrix,0,1"', $output);
-            foreach ($output as $line) {
-                $outputData .= $line."\n";
-            }
-            saveData('Start Tune To Sign', 'Begin', false, $pluginPath . "/xShowUpdater.txt");
-            saveData('Tune To Sign execution output', $outputData, false, $pluginPath . "/xShowUpdater.txt");
-        }
-    }
+//    if ($currentStatus === 1) {
+//        $effects = getRunningEffects();
+//        if (!in_array($tuneToSignEffect, $effects)) {
+//            exec('fpp -e "TuneToMatrix,0,1"', $output);
+//            foreach ($output as $line) {
+//                $outputData .= $line."\n";
+//            }
+//            saveData('Start Tune To Sign', 'Begin', false, $pluginPath . "/xShowUpdater.txt");
+//            saveData('Tune To Sign execution output', $outputData, false, $pluginPath . "/xShowUpdater.txt");
+//        }
+//    }
     // get store again in case the the apiKey is updated
     $store = json_decode(file_get_contents($pluginPath . "/store.json"));
     saveData('store.json contents', file_get_contents($pluginPath . "/store.json"), false, $pluginPath . "/xShowUpdater.txt");
@@ -38,13 +36,13 @@ while(true) {
 
     saveData('Check show status', $currentStatus, false, $pluginPath . "/xShowUpdater.txt");
     if ($currentStatus !== 1) {
-        // stop effects
-        exec('fpp -E "TuneToMatrix"', $output);
-        $outputData = '';
-        foreach ($output as $line) {
-            $outputData .= $line."\n";
-        }
-        saveData('Stopping Tune to Sign Effect', $outputData, false, $pluginPath . "/xShowUpdater.txt");
+//        // stop effects
+//        exec('fpp -E "TuneToMatrix"', $output);
+//        $outputData = '';
+//        foreach ($output as $line) {
+//            $outputData .= $line."\n";
+//        }
+//        saveData('Stopping Tune to Sign Effect', $outputData, false, $pluginPath . "/xShowUpdater.txt");
 
         $projectorStatus = $pjlink->getPowerState($store->projectorIp, '', '60', $store->projectorPort);
         // show is off check projector status
