@@ -32,7 +32,7 @@ while(true) {
     saveData('Check show status', $currentStatus, false, $pluginPath . "/xShowUpdater.txt");
     if ($currentStatus !== 1) {
         // stop effects
-        exec('fpp -E "TuneToMatrix', $output);
+        exec('fpp -E "TuneToMatrix"', $output);
         $outputData = '';
         foreach ($output as $line) {
             $outputData .= $line."\n";
