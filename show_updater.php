@@ -52,6 +52,7 @@ while(true) {
     // start the Tune To Sign and loop the effect
     if ($currentStatus === 1) {
         $effects = getRunningEffects();
+        saveData('Get Running Effects', '', false, $pluginPath . "/xShowUpdater.txt");
         foreach ($effects as $effect) {
             saveData('Effect Running', $effect, false, $pluginPath . "/xShowUpdater.txt");
         }
