@@ -33,6 +33,11 @@ while(true) {
     if ($currentStatus !== 1) {
         // stop effects
         exec('fpp -E "TuneToMatrix', $output);
+        $outputData = '';
+        foreach ($output as $line) {
+            $outputData .= $line."\n";
+        }
+        saveData('Stopping Tune to Sign Effect', $outputData, false, $pluginPath . "/xShowUpdater.txt");
 
         $projectorStatus = $pjlink->getPowerState($store->projectorIp, '', '60', $store->projectorPort);
         // show is off check projector status
