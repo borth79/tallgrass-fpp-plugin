@@ -5,10 +5,13 @@ include('pjlink.config.php');
 $showInitiated = true;
 $tuneToSignPath = $pluginPath . '/scripts/startTuneToSign.sh';
 while(true) {
+    $fppStatus = getFppStatus();
+    $currentStatus = $fppStatus->status;
+
     saveData('Start while loop', date('Y-m-d H:i:s'), true, $pluginPath . "/xShowUpdater.txt");
     saveData('Plugin Path', $pluginPath, false, $pluginPath . "/xShowUpdater.txt");
     // start the Tune To Sign and loop the effect
-    if ($showInitiated) {
+    if ($showInitiated && $currentStatus === 1) {
         exec('fpp -e "TuneToMatrix,0,1"', $output);
         foreach ($output as $line) {
             $outputData .= $line."\n";
@@ -26,8 +29,6 @@ while(true) {
     saveData('projectorIp', $store->projectorIp, false, $pluginPath . "/xShowUpdater.txt");
     saveData('persistentProjector', $store->persistentProjector, false, $pluginPath . "/xShowUpdater.txt");
 
-    $fppStatus = getFppStatus();
-    $currentStatus = $fppStatus->status;
     saveData('Check show status', $currentStatus, false, $pluginPath . "/xShowUpdater.txt");
     if ($currentStatus !== 1) {
         // stop effects
