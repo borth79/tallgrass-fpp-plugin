@@ -4,7 +4,7 @@
 	"author": "Brandon Orth",
 	"description": "Integration for the TallGrassLights.com website",
 	"homeURL": "https://github.com/borth79/tallgrass-fpp-plugin",
-	"srcURL": "https://github.com/borth79/tallgrass-fpp-plugin",
+	"srcURL": "https://github.com/borth79/tallgrass-fpp-plugin.git",
 	"bugURL": "https://github.com/borth79/tallgrass-fpp-plugin/issues",
 	"allowUpdates": 1,
 	"versions": [
